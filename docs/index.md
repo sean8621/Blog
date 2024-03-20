@@ -5,11 +5,11 @@ layout: home
 hero:
   name: "Sean86 Blog"
   text: "个人学习博客"
-  tagline: My great project tagline
+  tagline: My Learning Notes
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: 文章
+      link: /css-article/reverse-border-radius
     - theme: alt
       text: API Examples
       link: /api-examples
@@ -22,4 +22,3 @@ features:
   - title: Feature C
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
-
