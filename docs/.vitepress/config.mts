@@ -35,6 +35,10 @@ export default defineConfig({
             text: "html2canvas线上图片资源上传",
             link: "/js-article/html2canvas-upload",
           },
+          {
+            text: "Echarts使用小技巧",
+            link: "/js-article/echarts-use-tips",
+          },
         ],
       },
       {
