@@ -45,17 +45,25 @@ export default defineConfig({
             text: "Echarts使用小技巧",
             link: "/js-article/echarts-use-tips",
           },
+          {
+            text: "数组遍历",
+            link: "/js-article/array-traversal",
+          },
         ],
       },
       {
         text: "Uni-App",
         items: [{ text: "uniapp踩坑", link: "/uniapp-article/dev-Pit" }],
       },
+      {
+        text: "Nginx",
+        items: [
+          { text: "清除页面缓存", link: "/nginx-article/clear-html-cache" },
+        ],
+      },
     ],
 
-    socialLinks: [
-      { icon: "github", link: "https://github.com/sean8621" },
-    ],
+    socialLinks: [{ icon: "github", link: "https://github.com/sean8621" }],
   },
   markdown: {
     image: {
