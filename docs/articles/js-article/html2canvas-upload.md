@@ -1,8 +1,8 @@
 # HTML2Canvas 将 html 和转换成图片，再转化为文件流上传
 
-canvas 只能访问本地资源，若图片引用了线上地址会引起图片跨域
+- canvas 只能访问本地资源，若图片引用了线上地址会引起图片跨域
 
-解决方案：将线上图片转化为 base64，并用 Promise 封装方法，用 async/await 调用，防止在图片未完全转化为 base64 前将 html 转化为图片了。
+- 解决方案：将线上图片转化为 base64，并用 Promise 封装方法，用 async/await 调用，防止在图片未完全转化为 base64 前将 html 转化为图片了。
 
 ## 1.线上图片转化为 base64
 

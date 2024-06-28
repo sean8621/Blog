@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: 笔记
-      link: /vue-article/scroll-list-components
+      link: /articles/vue-article/scroll-list-components
     - theme: alt
       text: Git Hub
       link: https://github.com/sean8621
@@ -17,11 +17,11 @@ hero:
 features:
   - title: Vue
     details: Vue相关笔记
-    link: /vue-article/scroll-list-components
+    link: /articles/vue-article/scroll-list-components
   - title: Uni-App
     details: Uni-App相关笔记
-    link: /uniapp-article/dev-Pit
-  - title: Css
+    link: /articles/uniapp-article/dev-Pit
+  - title: JS
     details: Css相关笔记
-    link: /css-article/reverse-border-radius
+    link: /articles/js-article/html2canvas-upload
 ---

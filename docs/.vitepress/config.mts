@@ -11,64 +11,76 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "首页", link: "/" },
-      { text: "笔记", link: "/vue-article/scroll-list-components" },
+      { text: "笔记", link: "/articles/vue-article/scroll-list-components" },
     ],
-
-    sidebar: [
-      // {
-      //   text: "Examples",
-      //   items: [
-      //     { text: "Markdown Examples", link: "/markdown-examples" },
-      //     { text: "Runtime API Examples", link: "/api-examples" },
-      //   ],
-      // },
-      {
-        text: "Vue",
-        items: [
-          { text: "滚动组件", link: "/vue-article/scroll-list-components" },
-          { text: "大屏可下钻地图组件", link: "/vue-article/echarts-map" },
-        ],
-      },
-      {
-        text: "CSS",
-        items: [
-          { text: "反向圆角", link: "/css-article/reverse-border-radius" },
-        ],
-      },
-      {
-        text: "JS",
-        items: [
-          {
-            text: "html2canvas线上图片资源上传",
-            link: "/js-article/html2canvas-upload",
-          },
-          {
-            text: "Echarts使用小技巧",
-            link: "/js-article/echarts-use-tips",
-          },
-          {
-            text: "数组遍历",
-            link: "/js-article/array-traversal",
-          },
-        ],
-      },
-      {
-        text: "Uni-App",
-        items: [
-          { text: "uniapp踩坑", link: "/uniapp-article/dev-Pit" },
-          {
-            text: "进度条动画",
-            link: "/uniapp-article/breath-animation",
-          },
-        ],
-      },
-      {
-        text: "Nginx",
-        items: [
-          { text: "清除页面缓存", link: "/nginx-article/clear-html-cache" },
-        ],
-      },
-    ],
+    sidebar: {
+      // 当用户位于 `guide` 目录时，会显示此侧边栏
+      "/articles/": [
+        {
+          text: "Vue",
+          // collapsed: true,
+          items: [
+            {
+              text: "自动滚动列表",
+              link: "/articles/vue-article/scroll-list-components",
+            },
+            {
+              text: "大屏可下钻地图组件",
+              link: "/articles/vue-article/echarts-map",
+            },
+          ],
+        },
+        {
+          text: "CSS",
+          items: [
+            {
+              text: "反向圆角",
+              link: "/articles/css-article/reverse-border-radius",
+            },
+          ],
+        },
+        {
+          text: "JS",
+          items: [
+            {
+              text: "html2canvas线上图片资源上传",
+              link: "/articles/js-article/html2canvas-upload",
+            },
+            {
+              text: "Echarts使用小技巧",
+              link: "/articles/js-article/echarts-use-tips",
+            },
+            {
+              text: "数组遍历",
+              link: "/articles/js-article/array-traversal",
+            },
+          ],
+        },
+        {
+          text: "Uni-App",
+          items: [
+            { text: "uniapp踩坑", link: "/articles/uniapp-article/dev-Pit" },
+            {
+              text: "进度条动画",
+              link: "/articles/uniapp-article/breath-animation",
+            },
+            {
+              text: "全局开启分享功能",
+              link: "/articles/uniapp-article/gloable-share",
+            },
+          ],
+        },
+        {
+          text: "Nginx",
+          items: [
+            {
+              text: "清除页面缓存",
+              link: "/articles/nginx-article/clear-html-cache",
+            },
+          ],
+        },
+      ],
+    },
 
     socialLinks: [{ icon: "github", link: "https://github.com/sean8621" }],
   },
