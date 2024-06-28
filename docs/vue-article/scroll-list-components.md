@@ -6,10 +6,11 @@
 
 - 3.实现滚轮在指定区域内滚动，能够控制控制上下滚动
 
-**实现效果**
-<img src="./assets/demo.gif" width="300px" height="300px" alt="vue2 滚动列表组件">
+## 实现效果
 
-**代码**
+<img src="./assets/demo.gif" width="500" height="500" alt="vue2 滚动列表组件">
+
+## 代码实现
 
 ```vue
 <template>

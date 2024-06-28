@@ -63,7 +63,7 @@
 ```
 
 **实现效果**
-![alt 横向圆角](../css-article/img/reverse-border-radius/image1.png)
+![alt 横向圆角](./assets/image1.png)
 
 ## 竖向圆角
 
@@ -119,4 +119,4 @@ $acticity-color: #eaf3ff;
 ```
 
 **实现效果**
-![alt 竖向圆角](../css-article/img/reverse-border-radius/image2.png)
+![alt 竖向圆角](./assets/image2.png)

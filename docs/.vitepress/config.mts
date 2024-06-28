@@ -54,7 +54,13 @@ export default defineConfig({
       },
       {
         text: "Uni-App",
-        items: [{ text: "uniapp踩坑", link: "/uniapp-article/dev-Pit" }],
+        items: [
+          { text: "uniapp踩坑", link: "/uniapp-article/dev-Pit" },
+          {
+            text: "进度条动画",
+            link: "/uniapp-article/breath-animation",
+          },
+        ],
       },
       {
         text: "Nginx",
