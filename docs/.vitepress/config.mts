@@ -23,6 +23,12 @@ export default defineConfig({
         ],
       },
       {
+        text: "Vue",
+        items: [
+          { text: "滚动组件", link: "/vue-article/scroll-list-components" },
+        ],
+      },
+      {
         text: "CSS",
         items: [
           { text: "反向圆角", link: "/css-article/reverse-border-radius" },
