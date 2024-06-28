@@ -48,7 +48,7 @@ name: 部署VitePress
 on:
   push:
     branches:
-      - docs # 这段是在推送到 docs 分支时触发该命令
+      - main # 这段是在推送到 main 分支时触发该命令
 
 jobs:
   build-and-deploy:
@@ -58,7 +58,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          ref: docs # 这一步检查 docs 代码
+          ref: main # 这一步检查 docs 代码
 
       - name: Setup Node.js and pnpm
         uses: actions/setup-node@v3
