@@ -26,6 +26,7 @@ export default defineConfig({
         text: "Vue",
         items: [
           { text: "滚动组件", link: "/vue-article/scroll-list-components" },
+          { text: "大屏可下钻地图组件", link: "/vue-article/echarts-map" },
         ],
       },
       {

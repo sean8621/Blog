@@ -1,25 +1,28 @@
 # vue2 滚动列表组件
 
-### 1.循环滚动，滚完数据之后会继续从头开始滚动
+- 1.循环滚动，滚完数据之后会继续从头开始滚动
 
-### 2.实现鼠标移入，停止滚动；鼠标移出，继续滚动；
+- 2.实现鼠标移入，停止滚动；鼠标移出，继续滚动；
 
-### 3.实现滚轮在指定区域内滚动，能够控制控制上下滚动
+- 3.实现滚轮在指定区域内滚动，能够控制控制上下滚动
 
 **实现效果**
-![alt 实现效果](../vue-article/assets/demo.gif)
+<img src="./assets/demo.gif" width="300px" height="300px" alt="vue2 滚动列表组件">
 
 **代码**
 
 ```vue
 <template>
   <div class="scroll-list">
-    <div class="scroll-list-head" :style="{ backgroundColor: defaultConfig.headerBGC }">
+    <div
+      class="scroll-list-head"
+      :style="{ backgroundColor: defaultConfig.headerBGC }"
+    >
       <span
         class="scroll-list-head-index"
         v-if="defaultConfig.index"
         :style="{
-          width: defaultConfig.columnWidth[0] + 'px'
+          width: defaultConfig.columnWidth[0] + 'px',
         }"
         >{{ defaultConfig.indexHeader }}</span
       >
@@ -27,7 +30,9 @@
         class="scroll-list-head-title"
         v-for="(item, index) in defaultConfig.header"
         :style="{
-          width: defaultConfig.columnWidth[index + 1] ? defaultConfig.columnWidth[index + 1] + 'px' : '60px'
+          width: defaultConfig.columnWidth[index + 1]
+            ? defaultConfig.columnWidth[index + 1] + 'px'
+            : '60px',
         }"
         :key="index"
         >{{ item }}</span
@@ -41,31 +46,49 @@
       @wheel.prevent="handleScroll"
     >
       <ul>
-        <li v-for="(item, index) in defaultConfig.data" ref="item" :key="index" class="scroll-list-li">
+        <li
+          v-for="(item, index) in defaultConfig.data"
+          ref="item"
+          :key="index"
+          class="scroll-list-li"
+        >
           <div
             class="scroll-list-item"
             :style="{
               transform: `translateY(-${currentScrollTop}px)`,
-              backgroundColor: item.id % 2 === 0 ? defaultConfig.oddRowBGC : defaultConfig.evenRowBGC
+              backgroundColor:
+                item.id % 2 === 0
+                  ? defaultConfig.oddRowBGC
+                  : defaultConfig.evenRowBGC,
             }"
           >
             <div
               class="scroll-list-item-index"
               v-if="defaultConfig.index"
               :style="{
-                width: defaultConfig.columnWidth[0] + 'px'
+                width: defaultConfig.columnWidth[0] + 'px',
               }"
             >
-              <span :style="{ backgroundColor: defaultConfig.headerBGC }">{{ item.id }}</span>
+              <span :style="{ backgroundColor: defaultConfig.headerBGC }">{{
+                item.id
+              }}</span>
             </div>
             <span
               class="scroll-list-item-content"
-              :style="{ width: defaultConfig.columnWidth[1] ? defaultConfig.columnWidth[1] + 'px' : '60px' }"
+              :style="{
+                width: defaultConfig.columnWidth[1]
+                  ? defaultConfig.columnWidth[1] + 'px'
+                  : '60px',
+              }"
               >{{ item.name }}</span
             >
             <span
               class="scroll-list-item-content"
-              :style="{ width: defaultConfig.columnWidth[2] ? defaultConfig.columnWidth[2] + 'px' : '60px' }"
+              :style="{
+                width: defaultConfig.columnWidth[2]
+                  ? defaultConfig.columnWidth[2] + 'px'
+                  : '60px',
+              }"
               >{{ item.value }}</span
             >
           </div>
@@ -80,8 +103,8 @@ export default {
   props: {
     config: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   data() {
     return {
@@ -114,19 +137,19 @@ export default {
          * @type {String}
          * @default headerBGC = '#00BAFF'
          */
-        headerBGC: '#f1792b',
+        headerBGC: "#f1792b",
         /**
          * @description Odd row background color
          * @type {String}
          * @default oddRowBGC = '#003B51'
          */
-        oddRowBGC: '#fde2db',
+        oddRowBGC: "#fde2db",
         /**
          * @description Even row background color
          * @type {String}
          * @default evenRowBGC = '#003B51'
          */
-        evenRowBGC: '#ffffff',
+        evenRowBGC: "#ffffff",
         /**
          * @description Column width
          * @type {Array<Number>}
@@ -144,68 +167,78 @@ export default {
          * @type {String}
          * @default indexHeader = '#'
          */
-        indexHeader: '#'
+        indexHeader: "#",
       },
       scrollSpeed: 80, // 滚动速度，单位为毫秒
       scrollInterval: null, // 滚动间隔的引用
       containerHeight: 0, // 容器高度
       dataListHeight: 0, // 单个字幕的高度
       currentScrollTop: 0, // 当前滚动的位置
-      isHovering: false // 标记鼠标是否悬停在容器上
-    }
+      isHovering: false, // 标记鼠标是否悬停在容器上
+    };
   },
   watch: {
     config(val) {
-      this.defaultConfig = val
+      this.defaultConfig = val;
       this.$nextTick(() => {
-        clearInterval(this.scrollInterval)
-        this.currentScrollTop = 0
-        this.dataListHeight = this.$refs.container.querySelector('.scroll-list-li').offsetHeight
-        this.startScrolling()
-      })
-    }
+        clearInterval(this.scrollInterval);
+        this.currentScrollTop = 0;
+        this.dataListHeight =
+          this.$refs.container.querySelector(".scroll-list-li").offsetHeight;
+        this.startScrolling();
+      });
+    },
   },
   mounted() {
-    this.containerHeight = this.$refs.container.offsetHeight
+    this.containerHeight = this.$refs.container.offsetHeight;
   },
   methods: {
     startScrolling() {
-      if (this.containerHeight >= this.defaultConfig.data.length * this.dataListHeight) {
-        return
+      if (
+        this.containerHeight >=
+        this.defaultConfig.data.length * this.dataListHeight
+      ) {
+        return;
       }
       if (!this.isHovering) {
         this.scrollInterval = setInterval(() => {
-          this.currentScrollTop += 1
+          this.currentScrollTop += 1;
           if (this.currentScrollTop >= this.dataListHeight) {
-            this.currentScrollTop = 0
-            this.defaultConfig.data.push(this.defaultConfig.data.shift())
+            this.currentScrollTop = 0;
+            this.defaultConfig.data.push(this.defaultConfig.data.shift());
           }
-        }, this.scrollSpeed)
+        }, this.scrollSpeed);
       }
     },
     stopScrolling() {
-      clearInterval(this.scrollInterval)
-      this.isHovering = true
+      clearInterval(this.scrollInterval);
+      this.isHovering = true;
     },
     startScrollingOnLeave() {
       if (this.isHovering) {
-        this.isHovering = false
-        this.startScrolling()
+        this.isHovering = false;
+        this.startScrolling();
       }
     },
     handleScroll(event) {
-      this.currentScrollTop += event.deltaY
+      this.currentScrollTop += event.deltaY;
       if (this.currentScrollTop < 0) {
-        this.currentScrollTop = 0
-      } else if (this.currentScrollTop > this.defaultConfig.data.length * this.dataListHeight - this.containerHeight) {
-        this.currentScrollTop = this.defaultConfig.data.length * this.dataListHeight - this.containerHeight
+        this.currentScrollTop = 0;
+      } else if (
+        this.currentScrollTop >
+        this.defaultConfig.data.length * this.dataListHeight -
+          this.containerHeight
+      ) {
+        this.currentScrollTop =
+          this.defaultConfig.data.length * this.dataListHeight -
+          this.containerHeight;
       }
-    }
+    },
   },
   beforeDestroy() {
-    clearInterval(this.scrollInterval) // 在组件销毁前清除滚动间隔
-  }
-}
+    clearInterval(this.scrollInterval); // 在组件销毁前清除滚动间隔
+  },
+};
 </script>
 
 <style lang="less" scoped>
