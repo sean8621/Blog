@@ -8,17 +8,20 @@ hero:
   tagline: My Learning Notes
   actions:
     - theme: brand
-      text: 文章
-      link: /css-article/reverse-border-radius
+      text: 笔记
+      link: /vue-article/scroll-list-components
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Git Hub
+      link: https://github.com/sean8621
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: Vue
+    details: Vue相关笔记
+    link: /vue-article/scroll-list-components
+  - title: Uni-App
+    details: Uni-App相关笔记
+    link: /uniapp-article/dev-Pit
+  - title: Css
+    details: Css相关笔记
+    link: /css-article/reverse-border-radius
 ---
