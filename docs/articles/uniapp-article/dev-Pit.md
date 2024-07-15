@@ -32,3 +32,37 @@
 ## 2.uni-app 不支持 SVG
 
 uniapp 不支持 svg，实现动画需要使用 canvas
+
+## 3.uniapp 使用 miniprogram-ci 上传代码
+
+1. 通过 pnpm 工具以命令 `pnpm install miniprogram-ci --save` 安装 miniprogram-ci 后，在调 ci.upload() 时，会报如下错误：
+
+```
+Error: dist/pages/party-building/index.js: undefined
+    at throwError (/var/lib/jenkins/workspace/wx-test/node_modules/.pnpm/miniprogram-ci@1.6.10/node_modules/miniprogram-ci/dist/utils/common.js:1:1103)
+    at f (/var/lib/jenkins/workspace/wx-test/node_modules/.pnpm/miniprogram-ci@1.6.10/node_modules/miniprogram-ci/dist/core/compile/handler/js.js:1:2541)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async compileJS (/var/lib/jenkins/workspace/wx-test/node_modules/.pnpm/miniprogram-ci@1.6.10/node_modules/miniprogram-ci/dist/core/compile/handler/js.js:1:2801)
+    at async Promise.all (index 6)
+    at async compileJSFiles (/var/lib/jenkins/workspace/wx-test/node_modules/.pnpm/miniprogram-ci@1.6.10/node_modules/miniprogram-ci/dist/core/compile/common.js:1:2580)
+    at async compile (/var/lib/jenkins/workspace/wx-test/node_modules/.pnpm/miniprogram-ci@1.6.10/node_modules/miniprogram-ci/dist/core/compile/mini_program.js:1:2482)
+    at async innerUpload (/var/lib/jenkins/workspace/wx-test/node_modules/.pnpm/miniprogram-ci@1.6.10/node_modules/miniprogram-ci/dist/ci/upload.js:1:1796)
+    at async upload (/var/lib/jenkins/workspace/wx-test/node_modules/.pnpm/miniprogram-ci@1.6.10/node_modules/miniprogram-ci/dist/ci/upload.js:1:898)
+    at async Object.upload (/var/lib/jenkins/workspace/wx-test/node_modules/.pnpm/miniprogram-ci@1.6.10/node_modules/miniprogram-ci/dist/utils/report.js:1:1403) {
+  code: 10009,
+  path: 'dist/pages/party-building/index.js'
+}
+```
+
+### 解决方案
+
+1. 把 node_modules 删掉 重新使用 npm install (亲测有效)
+2. 运行命令 pnpm add -D ansi-styles@5 supports-color@8 has-flag@4
+3. 修改.npmrc 文件
+   public-hoist-pattern[]=_ansi-styles_
+   public-hoist-pattern[]=_supports-color_
+   public-hoist-pattern[]=_has-flag_
+
+[参考文章 1](https://developers.weixin.qq.com/community/develop/doc/000e284b7d4bc09b194d0748356800)
+
+[参考文章 2](https://developers.weixin.qq.com/community/develop/doc/0004a6592d8ff8b914de889555b400)
