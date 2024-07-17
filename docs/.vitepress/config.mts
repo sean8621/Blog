@@ -35,11 +35,25 @@ export default defineConfig({
           ],
         },
         {
+          text: "React",
+          // collapsed: true,
+          items: [
+            {
+              text: "reactTips",
+              link: "/articles/react-article/react-tips",
+            }
+          ],
+        },
+        {
           text: "CSS",
           items: [
             {
               text: "反向圆角",
               link: "/articles/css-article/reverse-border-radius",
+            },
+            {
+              text: "气泡对话框",
+              link: "/articles/css-article/bubble-dialog",
             },
           ],
         },
@@ -83,6 +97,15 @@ export default defineConfig({
             },
           ],
         },
+        {
+          text: "其他",
+          items:[
+            {
+              text:"ESLint配置",
+              link:'/articles/other-article/esLint'
+            }
+          ]
+        }
       ],
     },
 
