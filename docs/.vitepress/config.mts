@@ -41,7 +41,7 @@ export default defineConfig({
             {
               text: "reactTips",
               link: "/articles/react-article/react-tips",
-            }
+            },
           ],
         },
         {
@@ -72,6 +72,10 @@ export default defineConfig({
               text: "数组遍历",
               link: "/articles/js-article/array-traversal",
             },
+            {
+              text: "TS使用技巧",
+              link: "/articles/js-article/ts-tips",
+            },
           ],
         },
         {
@@ -99,13 +103,17 @@ export default defineConfig({
         },
         {
           text: "其他",
-          items:[
+          items: [
             {
-              text:"ESLint配置",
-              link:'/articles/other-article/esLint'
-            }
-          ]
-        }
+              text: "ESLint配置",
+              link: "/articles/other-article/esLint",
+            },
+            {
+              text: "函数重载",
+              link: "/articles/other-article/funtion-overload",
+            },
+          ],
+        },
       ],
     },
 
