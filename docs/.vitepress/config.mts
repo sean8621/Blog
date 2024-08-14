@@ -32,6 +32,10 @@ export default defineConfig({
               text: "Element-ui Tab 组件切换时 Echarts 解决宽度 100% 问题",
               link: "/articles/vue-article/element-tabpan-echarts",
             },
+            {
+              text: "v-if与v-for",
+              link: "/articles/vue-article/vIf-vFor",
+            },
           ],
         },
         {
@@ -54,6 +58,10 @@ export default defineConfig({
             {
               text: "气泡对话框",
               link: "/articles/css-article/bubble-dialog",
+            },
+            {
+              text: "content-visibility 优化渲染性能",
+              link: "/articles/css-article/content-visibility",
             },
           ],
         },
