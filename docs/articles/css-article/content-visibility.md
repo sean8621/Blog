@@ -309,3 +309,6 @@ content-visibility: auto;
 3. 合理使用 contain-intrinsic-size 预估设置了 content-visibility: auto 元素的高宽，可以有效的避免滚动条在滚动过程中的抖动；
 4. content-visibility: auto 无法直接替代 LazyLoad，设置了 content-visibility: auto 的元素在可视区外只是未被渲染，但是其中的静态资源仍旧会在页面初始化的时候被全部加载；
 5. 即便存在设置了 content-visibility: auto 的未被渲染的元素，但是它并不会影响全局的搜索功能。
+
+
+[原文地址](https://github.com/chokcoco/iCSS/issues/185)
