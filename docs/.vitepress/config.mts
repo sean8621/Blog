@@ -36,6 +36,10 @@ export default defineConfig({
               text: "v-if与v-for",
               link: "/articles/vue-article/vIf-vFor",
             },
+            {
+              text:'Vue2/3区别',
+              link:'/articles/vue-article/vue2-vue3diff'
+            }
           ],
         },
         {
