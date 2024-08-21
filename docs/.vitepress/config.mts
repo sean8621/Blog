@@ -37,9 +37,9 @@ export default defineConfig({
               link: "/articles/vue-article/vIf-vFor",
             },
             {
-              text:'Vue2/3区别',
-              link:'/articles/vue-article/vue2-vue3diff'
-            }
+              text: "Vue2/3区别",
+              link: "/articles/vue-article/vue2-vue3diff",
+            },
           ],
         },
         {
@@ -87,6 +87,10 @@ export default defineConfig({
             {
               text: "TS使用技巧",
               link: "/articles/js-article/ts-tips",
+            },
+            {
+              text: "JS手写题",
+              link: "/articles/js-article/js-handwriting",
             },
           ],
         },
