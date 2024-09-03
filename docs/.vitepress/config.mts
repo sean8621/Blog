@@ -40,6 +40,10 @@ export default defineConfig({
               text: "Vue2/3区别",
               link: "/articles/vue-article/vue2-vue3diff",
             },
+            {
+              text: "Vue3-ts 对接腾讯地图问题",
+              link: "/articles/vue-article/vue3-ts-txmap",
+            },
           ],
         },
         {
@@ -66,6 +70,10 @@ export default defineConfig({
             {
               text: "content-visibility 优化渲染性能",
               link: "/articles/css-article/content-visibility",
+            },
+            {
+              text: "CSS Tips",
+              link: "/articles/css-article/css-tips",
             },
           ],
         },
