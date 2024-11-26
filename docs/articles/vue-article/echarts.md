@@ -1,4 +1,4 @@
-# Echarts Map 地图
+# 1.Echarts Map 地图
 
 - 1.可点击地图下钻下一级地图、右键返回上一级地图
 - 2.地图视觉立体感、
@@ -282,3 +282,30 @@ export default {
 }
 </style>
 ```
+
+# 2.Echarts Vue3 报错
+
+## 报错信息
+
+<img src="./assets/echartsTips1.png" width="600" height="600">
+
+## 报错原因
+
+Echarts 管理的状态和数据与 Vue 的响应式产生冲突，导致 Echarts 无法正常更新而报错
+
+## 解决方法
+
+取消 VUE 的响应式系统观测 Echarts 的变化更新，让 Echarts 自动更新
+markRaw 将 Echarts 实例标记为原始对象
+
+```js
+// 导入 markRaw
+import { markRaw } from "vue";
+
+const chartInstance: any = ref(null);
+// 标记这个DOM对象， Vue 不要将其转换为响应式数据。
+chartInstance.value = markRaw(
+  echarts.init(document.getElementById("chartline"))
+);
+```
+另外  在 VUE 中如果想实时绘制Echarts的话，需要手动的调用 setOption(option, true)

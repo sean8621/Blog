@@ -25,8 +25,8 @@ export default defineConfig({
               link: "/articles/vue-article/scroll-list-components",
             },
             {
-              text: "大屏可下钻地图组件",
-              link: "/articles/vue-article/echarts-map",
+              text: "echarts组件",
+              link: "/articles/vue-article/echarts",
             },
             {
               text: "Element-ui Tab 组件切换时 Echarts 解决宽度 100% 问题",
