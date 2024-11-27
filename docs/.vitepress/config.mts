@@ -136,6 +136,10 @@ export default defineConfig({
               text: "函数重载",
               link: "/articles/other-article/funtion-overload",
             },
+            {
+              text: "Git 使用技巧",
+              link: "/articles/other-article/git",
+            },
           ],
         },
       ],
