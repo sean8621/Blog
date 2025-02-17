@@ -3,4 +3,5 @@
 
 # commitlint配置
 [组件库级 commitlint 提交校验](https://zhuanlan.zhihu.com/p/12461058025)
+
 [git提交规范 commitLint](https://juejin.cn/post/6877081615357607943)
