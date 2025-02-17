@@ -129,7 +129,7 @@ export default defineConfig({
           text: "其他",
           items: [
             {
-              text: "ESLint配置",
+              text: "搭建项目配置",
               link: "/articles/other-article/esLint",
             },
             {
