@@ -140,6 +140,10 @@ export default defineConfig({
               text: "Git 使用技巧",
               link: "/articles/other-article/git",
             },
+            {
+              text: "Icon Font使用",
+              link: "/articles/other-article/iconfont",
+            },
           ],
         },
       ],
