@@ -66,3 +66,17 @@ Error: dist/pages/party-building/index.js: undefined
 [参考文章 1](https://developers.weixin.qq.com/community/develop/doc/000e284b7d4bc09b194d0748356800)
 
 [参考文章 2](https://developers.weixin.qq.com/community/develop/doc/0004a6592d8ff8b914de889555b400)
+
+## 4.Uniapp 微信小程序渐变样式不生效
+
+### 开始用的一直是这个，调试一直没问题，但是重新启动就没生效，经查询这个不适合小程序使用：不适合没生效
+
+```css
+background-image: linear-gradient(to right, #33f38d8a, #6dd5ed00);
+```
+
+### 正确使用下面这个： 生效，适合使用
+
+```css
+background-image: linear-gradient(90deg, #33f38d8a 30%, #6dd5ed00 100%);
+```
