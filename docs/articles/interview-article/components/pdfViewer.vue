@@ -13,13 +13,14 @@ const props = defineProps({
     required: true,
   },
 });
-
+// PDF 文件根路径
+const rootUrl = "/Blog";
 const pages = ref([]);
 
 // 渲染 PDF
 const renderPDF = async (url) => {
   pages.value = []; // 清空已有页面
-  const pdf = await pdfjsLib.getDocument(url).promise;
+  const pdf = await pdfjsLib.getDocument(rootUrl + url).promise;
   const totalPages = pdf.numPages;
 
   for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
@@ -41,14 +42,14 @@ const renderPDF = async (url) => {
 
 // 组件挂载时渲染 PDF
 onMounted(() => {
-  renderPDF("/Blog/" + props.pdfUrl);
+  renderPDF(props.pdfUrl);
 });
 
 // 监听 PDF 地址变化，重新渲染
 watch(
   () => props.pdfUrl,
   (newUrl) => {
-    renderPDF("/Blog/" + newUrl);
+    renderPDF(newUrl);
   }
 );
 </script>

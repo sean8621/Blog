@@ -13,6 +13,9 @@ export default defineConfig({
       { text: "首页", link: "/" },
       { text: "笔记", link: "/articles/vue-article/scroll-list-components" },
     ],
+    search: {
+      provider: "local",
+    },
     sidebar: {
       // 当用户位于 `guide` 目录时，会显示此侧边栏
       "/articles/": [
