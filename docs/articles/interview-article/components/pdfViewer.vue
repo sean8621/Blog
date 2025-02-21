@@ -1,7 +1,7 @@
 <script setup>
-import { ref, watch, onMounted } from 'vue';
-import * as pdfjsLib from 'pdfjs-dist';
-import pdfWorker from 'pdfjs-dist/build/pdf.worker.min?url';
+import { ref, watch, onMounted } from "vue";
+import * as pdfjsLib from "pdfjs-dist";
+import pdfWorker from "pdfjs-dist/build/pdf.worker.min?url";
 
 // 配置 pdf.js worker
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
@@ -10,8 +10,8 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
 const props = defineProps({
   pdfUrl: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const pages = ref([]);
@@ -26,8 +26,8 @@ const renderPDF = async (url) => {
     const page = await pdf.getPage(pageNum);
     const viewport = page.getViewport({ scale: 1.5 });
 
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
     canvas.width = viewport.width;
     canvas.height = viewport.height;
 
@@ -35,25 +35,32 @@ const renderPDF = async (url) => {
     await page.render(renderContext).promise;
 
     // 存储页面图像
-    pages.value.push(canvas.toDataURL('image/png'));
+    pages.value.push(canvas.toDataURL("image/png"));
   }
 };
 
 // 组件挂载时渲染 PDF
 onMounted(() => {
-  renderPDF(props.pdfUrl);
+  renderPDF("/Blog/" + props.pdfUrl);
 });
 
 // 监听 PDF 地址变化，重新渲染
-watch(() => props.pdfUrl, (newUrl) => {
-  renderPDF(newUrl);
-});
+watch(
+  () => props.pdfUrl,
+  (newUrl) => {
+    renderPDF("/Blog/" + newUrl);
+  }
+);
 </script>
 
 <template>
   <div>
-    <div v-for="(page, index) in pages" :key="index" style="margin-bottom: 10px;">
-      <img :src="page" alt="PDF Page" style="width: 100%; max-width: 800px;" />
+    <div
+      v-for="(page, index) in pages"
+      :key="index"
+      style="margin-bottom: 10px"
+    >
+      <img :src="page" alt="PDF Page" style="width: 100%; max-width: 800px" />
     </div>
   </div>
 </template>
