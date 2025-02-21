@@ -6,7 +6,6 @@ export default defineConfig({
   title: "Sean86 Blog",
   description: "Personal Study Blog",
   lang: "zh-CN",
-  base: "/Blog/",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
