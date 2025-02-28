@@ -96,6 +96,10 @@ export default defineConfig({
               link: "/articles/js-article/array-traversal",
             },
             {
+              text: "JS使用技巧",
+              link: "/articles/js-article/js-tips",
+            },
+            {
               text: "TS使用技巧",
               link: "/articles/js-article/ts-tips",
             },
