@@ -155,6 +155,10 @@ export default defineConfig({
               text: "Icon Font使用",
               link: "/articles/other-article/iconfont",
             },
+            {
+              text: "packagejson遇到的问题",
+              link: "/articles/other-article/package-json",
+            },
           ],
         },
         {
