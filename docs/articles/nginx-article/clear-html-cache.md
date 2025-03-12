@@ -4,7 +4,7 @@
 
 ## 配置文件
 
-```
+```bash
 server {
     listen 80;
     server_name example.com;

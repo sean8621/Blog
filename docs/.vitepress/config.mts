@@ -130,6 +130,10 @@ export default defineConfig({
               text: "清除页面缓存",
               link: "/articles/nginx-article/clear-html-cache",
             },
+            {
+              text: "部署成功 刷新页面404",
+              link: "/articles/nginx-article/404-solve",
+            },
           ],
         },
         {
