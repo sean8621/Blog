@@ -224,6 +224,10 @@ export default defineConfig({
               text: "设计模式面试题",
               link: "/articles/interview-article/design",
             },
+            {
+              text: "深入学习",
+              link: "/articles/interview-article/深入学习",
+            },
           ],
         },
       ],
