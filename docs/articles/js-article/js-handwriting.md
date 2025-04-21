@@ -128,3 +128,5 @@ family.myforEach((item, index, arr) => {
   arr[index] = `${item}!`;
 }); // ["hello jim!", "hello tom!", "hello jack!", "hello kim!"]
 ```
+
+[手写题](https://gitee.com/Sean-86/learning/tree/main/%E6%89%8B%E5%86%99%E9%A2%98)
