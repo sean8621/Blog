@@ -121,13 +121,13 @@ console.log(Object.prototype.toString.call(arr) === "[object Array]"); // 输出
 
 `%`（取模）
 
-1. 加法和减法
+6. 加法和减法
 
 `+`（加法）
 
 `-`（减法）
 
-1. 小于、大于和相等比较
+7. 小于、大于和相等比较
 
 `<`（小于）
 
@@ -335,3 +335,171 @@ console.log(0 && 1, 0 || 1, 1 && 3, 1 || 3);
 
 - 1 || 3 结果为 1：
   因为||运算符遇到真值就会立即返回,1 是真值所以直接返回 1。
+
+## 十五、for in 与 for of 区别
+
+在 JavaScript 中，`for...in` 和 `for...of` 是两种不同的循环结构，用途和行为也有所不同。以下是它们的区别和适用场景：
+
+---
+
+### **1. `for...in`**
+
+#### 语法：
+
+```javascript
+for (let i in item) {
+  // 执行代码
+}
+```
+
+#### 特点：
+
+- **用于遍历对象的可枚举属性**。
+- `i` 是属性名（键），而不是值。
+- 主要适用于对象（包括数组、普通对象等）。
+- 遍历的是对象的**键**，而不是值。
+
+#### 示例：
+
+```javascript
+let obj = { a: 1, b: 2, c: 3 };
+
+for (let key in obj) {
+  console.log(key); // 输出: "a", "b", "c"
+  console.log(obj[key]); // 输出: 1, 2, 3
+}
+
+// 数组的情况
+let arr = ["x", "y", "z"];
+for (let index in arr) {
+  console.log(index); // 输出: "0", "1", "2" （索引）
+  console.log(arr[index]); // 输出: "x", "y", "z" （值）
+}
+```
+
+#### 注意事项：
+
+- 对于数组，`for...in` 遍历的是数组的索引（字符串形式），而不是元素值。
+- 不建议用 `for...in` 遍历数组，因为它会遍历所有可枚举属性（包括原型链上的属性），可能会导致意外行为。
+- 如果需要遍历对象的键，使用 `for...in` 是合适的。
+
+---
+
+### **2. `for...of`**
+
+#### 语法：
+
+```javascript
+for (let i of item) {
+  // 执行代码
+}
+```
+
+#### 特点：
+
+- **用于遍历可迭代对象（如数组、字符串、Map、Set 等）的值**。
+- `i` 是值本身，而不是键或索引。
+- 只能用于实现了 **`[Symbol.iterator]`** 方法的对象（即支持迭代协议的对象）。
+- 不适用于普通的对象（非可迭代对象）。
+
+#### 示例：
+
+```javascript
+// 数组
+let arr = ["x", "y", "z"];
+for (let value of arr) {
+  console.log(value); // 输出: "x", "y", "z"
+}
+
+// 字符串
+let str = "hello";
+for (let char of str) {
+  console.log(char); // 输出: "h", "e", "l", "l", "o"
+}
+
+// Map
+let map = new Map([
+  ["a", 1],
+  ["b", 2],
+]);
+for (let [key, value] of map) {
+  console.log(key, value); // 输出: "a 1", "b 2"
+}
+
+// Set
+let set = new Set([1, 2, 3]);
+for (let value of set) {
+  console.log(value); // 输出: 1, 2, 3
+}
+```
+
+#### 注意事项：
+
+- 普通对象不是可迭代对象，因此不能直接使用 `for...of`。
+  ```javascript
+  let obj = { a: 1, b: 2 };
+  for (let value of obj) {
+    console.log(value); // 报错：obj is not iterable
+  }
+  ```
+- 如果需要对普通对象使用 `for...of`，可以先将其转换为可迭代的形式，例如通过 `Object.entries()`。
+
+---
+
+### **总结对比**
+
+| 特性                 | `for...in`                   | `for...of`                              |
+| -------------------- | ---------------------------- | --------------------------------------- |
+| **适用范围**         | 对象（包括数组、普通对象等） | 可迭代对象（数组、字符串、Map、Set 等） |
+| **返回值**           | 键（属性名）                 | 值                                      |
+| **是否适合数组**     | 不推荐，可能包含额外属性     | 推荐，直接遍历数组的值                  |
+| **是否适合普通对象** | 适合，用于遍历对象的键       | 不适合，普通对象不可迭代                |
+
+---
+
+### **选择建议**
+
+1. 如果需要遍历对象的键（属性名），使用 `for...in`。
+2. 如果需要遍历数组、字符串或其他可迭代对象的值，使用 `for...of`。
+3. 如果需要同时获取键和值，可以结合 `Object.entries()` 使用 `for...of`：
+   ```javascript
+   let obj = { a: 1, b: 2 };
+   for (let [key, value] of Object.entries(obj)) {
+     console.log(key, value); // 输出: "a 1", "b 2"
+   }
+   ```
+
+## 十六、new Boolean()与 Boolean()区别
+
+```js
+var x = new Boolean(false);
+if (x) {
+  alert("hi");
+}
+var y = Boolean(0);
+if (y) {
+  alert("hello");
+}
+```
+
+- `var x = new Boolean(false)` 创建了一个 `Boolean` 对象。尽管传入的参数是 `false`，但是在 `if` 语句中进行条件判断时，对象总是会被计算为 `true`，因此会执行 `alert('hi')`。
+
+- `var y = Boolean(0)` 则是调用 `Boolean` 函数将 `0` 转换为布尔值 `false`，在 `if` 语句中进行条件判断时，`false` 不会执行对应的代码块，因此不会执行 `alert('hello')`。
+
+## 十七、选择题
+
+```js
+output(typeof (function() {output(“Hello World!”)})());
+// Hello World! undefined
+```
+
+- 逐步分析执行过程：
+
+1. 首先,定义了一个匿名函数 function() {output("Hello World!")}
+2. 通过末尾的()立即执行这个函数
+3. 函数执行时会先输出"Hello World!"
+4. 函数没有显式的 return 语句,所以返回 undefined
+5. 最后对这个 undefined 值执行 typeof 操作,结果为"undefined"
+6. 最终输出"undefined"
+
+- 任何函数执行完一次，如果没有 return 返回值和声明变量接受返回值，都会立即消失，永远找不到值！
