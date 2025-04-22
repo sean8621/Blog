@@ -503,3 +503,104 @@ output(typeof (function() {output(“Hello World!”)})());
 6. 最终输出"undefined"
 
 - 任何函数执行完一次，如果没有 return 返回值和声明变量接受返回值，都会立即消失，永远找不到值！
+
+## 十八、解构
+
+```js
+const [a, b] = "123";
+const { c, d } = "123";
+console.log(a); // 输出：1
+console.log(b); // 输出：2
+console.log(c); // 输出：undefined
+console.log(d); // 输出：undefined
+```
+
+- 使用数组解构时，被解构的值需要包含一个迭代器，而字符串原生就携带有一个 Iterator 迭代器，因此可以顺利的对字符串'123'进行解构
+- 使用对象解构时，被解构值需要被强制转换为对象，因此字符串'123'被转换为 String 对象，但是当解构一个未定义的属性时得到的值为 undefined
+
+## 十九、闭包
+
+- 闭包的核心特性就是能够访问其他函数内部的变量。它可以"记住"并访问所在的词法作用域,即使函数是在当前词法作用域之外执行。
+- 过度使用闭包确实可能导致内存泄露。因为闭包会保持对外部变量的引用,如果闭包的生命周期较长,就会阻止这些变量被垃圾回收器回收。
+- 从技术角度来说,所有的 JavaScript 函数都是闭包,因为它们都可以访问外部作用域的变量。即使是一个简单的函数,也会创建一个闭包来访问其所在的词法环境。
+
+## 二十、选择题
+
+```js
+let obj = {
+  num1: 117,
+};
+let res = obj;
+obj.child = obj = { num2: 935 };
+var x = (y = res.child.num2);
+console.log(obj.child); // 输出：undefined
+console.log(res.num1); // 输出：117
+console.log(y); // 输出：935
+console.log(x); // 输出：935
+console.log(obj); // 输出：{num2: 935}
+console.log(res); // 输出：{num1: 117,child: {num2: 935}}
+```
+
+## 二十一、axios 取消请求方法
+
+- Axios 自带的 cancelToken 对象
+  `AbortController` 是一个浏览器提供的 API，用于取消正在进行的异步操作，如 Fetch 请求或 Axios 请求。你可以创建一个 `AbortController` 实例，并在 Axios 请求配置中通过 signal 属性传递它。
+
+```js
+import axios from "axios";
+
+const controller = new AbortController();
+
+axios
+  .get("/foo/bar", {
+    signal: controller.signal,
+  })
+  .then((response) => {
+    // 处理响应
+  })
+  .catch((error) => {
+    if (error.name === "AbortError") {
+      console.log("请求被取消");
+    } else {
+      console.error("发生了一个错误:", error);
+    }
+  });
+
+// 取消请求
+controller.abort();
+```
+
+- 浏览器内置的 AbortController 对象
+  CancelToken 是 Axios 自带的一个类，用于实现请求取消功能。你需要创建一个 CancelToken 实例，并在请求配置中通过 cancelToken 属性传递它。
+
+```js
+import axios from "axios";
+import CancelToken from "axios/cancelToken";
+
+let cancel;
+
+// 发起请求
+axios
+  .get("/foo/bar", {
+    cancelToken: new CancelToken((c) => (cancel = c)),
+  })
+  .then((response) => {
+    // 处理响应
+  })
+  .catch((error) => {
+    if (axios.isCancel(error)) {
+      console.log("请求被取消");
+    } else {
+      console.error("发生了一个错误:", error);
+    }
+  });
+
+// 取消请求
+if (cancel) {
+  cancel("取消请求的原因");
+}
+```
+
+摘自[Axios 取消请求，封装全局取消请求，axios-retry 请求重试](https://juejin.cn/post/7406166286130135081?searchId=202504221620580D5651B8CE2316AFCF63)
+
+[axios 取消请求原理参考](https://juejin.cn/post/7284417436752265277?searchId=20250422163230E92011E94A065597E303)
