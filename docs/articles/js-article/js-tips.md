@@ -604,3 +604,266 @@ if (cancel) {
 摘自[Axios 取消请求，封装全局取消请求，axios-retry 请求重试](https://juejin.cn/post/7406166286130135081?searchId=202504221620580D5651B8CE2316AFCF63)
 
 [axios 取消请求原理参考](https://juejin.cn/post/7284417436752265277?searchId=20250422163230E92011E94A065597E303)
+
+## 二十二、内存泄漏情况
+
+1. 全局变量
+
+```js
+// 意外的全局变量
+function foo(arg) {
+  bar = "this is a hidden global variable";
+}
+
+// this创建的
+function foo() {
+  this.variable = "potential accidental global";
+}
+// foo 调用自己，this 指向了全局对象（window）
+foo();
+```
+
+- 使用严格模式，可以避免意外的全局变量
+
+2. 闭包
+
+```js
+function bindEvent() {
+  var obj = document.createElement("XXX");
+  var unused = function () {
+    console.log(obj, "闭包内引用obj obj不会被释放");
+  };
+  obj = null; // 解决方法
+}
+```
+
+3. 定时器
+
+```js
+var someResource = getData();
+setInterval(function () {
+  var node = document.getElementById("Node");
+  if (node) {
+    // 处理 node 和 someResource
+    node.innerHTML = JSON.stringify(someResource);
+  }
+}, 1000);
+```
+
+4. 没有及时清除的 dom 元素
+
+```js
+const refA = document.getElementById("refA");
+document.body.removeChild(refA); // dom删除了
+console.log(refA, "refA"); // 但是还存在引用能console出整个div 没有被回收
+refA = null;
+console.log(refA, "refA"); // 解除引用
+```
+
+5. 没有及时清除监听事件
+
+```js
+function test() {
+  let el = document.createElement("div");
+  document.body.appendChild(el);
+  let child = document.createElement("div");
+  el.appendChild(child);
+  
+  document.body.removeChild(el) // 由于 el 变量存在，el及其子元素都不能被GC
+  el = null;   // 虽置空了 el 变量，但由于 child 变量引用 el 的子节点，所以 el 元素依然不能被GC
+  child = null; // 已无变量引用，此时el可以GC
+  
+}
+​
+test();
+```
+
+6. 循环引用
+
+- 如果两个对象相互引用，且不存在其他对象对它们的引用，就会导致这两个对象无法被正常释放，从而导致内存泄漏。
+
+```js
+function test() {
+  var obj1 = {};
+  var obj2 = {};
+  obj1.prop = obj2;
+  obj2.prop = obj1;
+}
+test();
+```
+
+7. eventBus 未清理
+
+- 在 Vue 应用中，eventBus 是常用的组件通信方式之一，但如果使用不当，也会导致内存泄漏。
+
+8. 未调用销毁函数
+
+```js
+const sortableInstance = Sortable.create(……)
+sortableInstance.destroy()
+```
+
+- 调用 destroy() 以移除插件中创建的事件及对象，否则可能造成内存泄漏。
+
+9. 未清理的 Console 输出
+   当开发人员使用 Console 输出大量数据时，这些数据可能会残留在浏览器的内存中，并在长时间的使用后导致浏览器变慢，并占用大量的内存。虽然这些数据不会直接导致内存泄漏，但是会降低应用程序的响应速度和性能，影响用户体验。
+
+## 二十三、APP 与 H5 通信
+
+[JSBridge](https://juejin.cn/post/7293728293768855587?searchId=2025042311531746337FABD975D5F3B315#heading-4)
+
+1. JsBridge
+
+- 实现步骤
+  1. 初始化 WebViewJavascriptBridge 对象：
+     - 对于 Android，如果 WebViewJavascriptBridge 对象已经存在，则直接使用；如果不存在，则在 'WebViewJavascriptBridgeReady' 事件触发时获取 WebViewJavascriptBridge 对象。
+     - 对于 iOS，如果 WebViewJavascriptBridge 对象已经存在，直接使用；如果不存在，则创建一个隐藏的 iframe 来触发 WebViewJavascriptBridge 的初始化，并在初始化完成后通过 WVJBCallbacks 回调数组来获取 WebViewJavascriptBridge 对象。
+  2. 注册事件
+     提供了 callHandler 和 registerHandler 两个方法，分别用于在 JS 中调用 APP 端的方法和注册供 APP 端调用的 JS 方法。
+  3. 调用方法
+     当 APP 或 JS 需要调用对方的方法时，只需调用 callHandler 或 registerHandler 方法即可。
+
+```js
+const { userAgent } = navigator;
+const isAndroid = userAgent.indexOf("android") > -1; // android终端
+
+/**
+ * Android  与安卓交互时：
+ *      1、不调用这个函数安卓无法调用 H5 注册的事件函数；
+ *      2、但是 H5 可以正常调用安卓注册的事件函数；
+ *      3、还必须在 setupWebViewJavascriptBridge 中执行 bridge.init 方法，否则：
+ *          ①、安卓依然无法调用 H5 注册的事件函数
+ *          ①、H5 正常调用安卓事件函数后的回调函数无法正常执行
+ *
+ * @param {*} callback
+ */
+function androidFn(callback) {
+  if (window.WebViewJavascriptBridge) {
+    callback(window.WebViewJavascriptBridge);
+  } else {
+    document.addEventListener(
+      "WebViewJavascriptBridgeReady",
+      () => {
+        callback(window.WebViewJavascriptBridge);
+      },
+      false
+    );
+  }
+}
+
+/**
+ * IOS 与 IOS 交互时，使用这个函数即可，别的操作都不需要执行
+ */
+function iosFn(callback) {
+  if (window.WebViewJavascriptBridge) {
+    return callback(window.WebViewJavascriptBridge);
+  }
+  if (window.WVJBCallbacks) {
+    return window.WVJBCallbacks.push(callback);
+  }
+  window.WVJBCallbacks = [callback];
+  const WVJBIframe = document.createElement("iframe");
+  WVJBIframe.style.display = "none";
+  WVJBIframe.src = "https://__BRIDGE_LOADED__";
+  document.documentElement.appendChild(WVJBIframe);
+  setTimeout(() => {
+    document.documentElement.removeChild(WVJBIframe);
+  }, 0);
+}
+
+/**
+ * 注册 setupWebViewJavascriptBridge 方法
+ *  之所以不将上面两个方法融合成一个方法，是因为放在一起，那么就只有 iosFuntion 中相关的方法体生效
+ */
+const setupWebViewJavascriptBridge = isAndroid ? androidFn : iosFn;
+
+/**
+ * 这里如果不做判断是不是安卓，而是直接就执行下面的方法，就会导致
+ *      1、IOS 无法调用 H5 这边注册的事件函数
+ *      2、H5 可以正常调用 IOS 这边的事件函数，并且 H5 的回调函数可以正常执行
+ */
+if (isAndroid) {
+  /**
+   * 与安卓交互时，不调用这个函数会导致：
+   *      1、H5 可以正常调用 安卓这边的事件函数，但是无法再调用到 H5 的回调函数
+   *
+   * 前提 setupWebViewJavascriptBridge 这个函数使用的是 andoirFunction 这个，否则还是会导致上面 1 的现象出现
+   */
+  setupWebViewJavascriptBridge((bridge) => {
+    console.log("打印***bridge", bridge);
+    // 注册 H5 界面的默认接收函数（与安卓交互时，不注册这个事件无法接收回调函数）
+    bridge.init((message, responseCallback) => {
+      responseCallback("JS 初始化");
+    });
+  });
+}
+
+export default {
+  // js调APP方法 （参数分别为:app提供的方法名  传给app的数据  回调）
+  callHandler(name, params, callback) {
+    setupWebViewJavascriptBridge((bridge) => {
+      bridge.callHandler(name, params, callback);
+    });
+  },
+
+  // APP调js方法 （参数分别为:js提供的方法名  回调）
+  registerHandler(name, callback) {
+    setupWebViewJavascriptBridge((bridge) => {
+      bridge.registerHandler(name, (data, responseCallback) => {
+        callback(data, responseCallback);
+      });
+    });
+  },
+};
+```
+
+总结：
+
+1. 跟 IOS 交互的时候，只需要且必须注册 iosFuntion 方法即可，不能在 setupWebViewJavascriptBridge 中执行 bridge.init 方法，否则 IOS 无法调用到 H5 的注册函数；
+2. 与安卓进行交互的时候
+
+- 使用 iosFuntion，就可以实现 H5 调用 安卓的注册函数，但是安卓无法调用 H5 的注册函数， 并且 H5 调用安卓成功后的回调函数也无法执行
+- 使用 andoirFunction 并且要在 setupWebViewJavascriptBridge 中执行 bridge.init 方法， 安卓才可以正常调用 H5 的回调函数，并且 H5 调用安卓成功后的回调函数也可以正常执行了
+
+H5 使用
+h5 获取 app 返回数据
+
+```js
+jsBridge.callHandler("getAppUserInfo", { title: "首页" }, (data) => {
+  console.log("获取app返回的数据", data);
+});
+```
+
+app 获取 h5 数据
+
+```js
+jsBridge.registerHandler("getInfo", (data, responseCallback) => {
+  console.log("打印***get app data", data);
+  responseCallback("我是返回的数据");
+});
+```
+
+两者都可通信，只要一方使用 registerHandler 注册了事件，另一方通过 callHandler 接受数据
+
+2. postMessage
+   postMessage 可以安全地实现跨源通信。从广义上讲，一个窗口可以获得对另一个窗口的引用（比如  targetWindow = window.opener），然后在窗口上调用  targetWindow.postMessage()  方法分发一个  MessageEvent  消息。
+
+```js
+<input type="text" id="ipt" />
+<button id="btn">点击操作页面</button>
+<script>
+    btn.onclick = function(){
+         const w2 = window.open('http://127.0.0.1:5500/src/utils/index2.html');
+
+        w2.onload = function () {
+            w2.postMessage('页面一 发送====> 页面二', "http://127.0.0.1:5500")
+        }
+    }
+
+    window.addEventListener('message',function(e){
+        console.log(e.data);
+        ipt.value = e.data;
+    })
+
+</script>
+```
