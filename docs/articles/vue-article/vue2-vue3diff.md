@@ -105,6 +105,11 @@ Vue3 新功能：
 composition Api，也就是组合式`api`，通过这种形式，我们能够更加容易维护我们的代码，将相同功能的变量进行一个集中式的管理
 ![composition API](./assets/vue2-vue3-diff-6.png)
 
+优势:
+1. 逻辑复用
+2. 更好的类型推导 Typescript支持
+3. 更好的代码组织
+
 ### createRenderer
 
 `vue3`新增了`createRenderer`，可以自定义渲染器,能够将`vue`的开发模型扩展到其他平台
