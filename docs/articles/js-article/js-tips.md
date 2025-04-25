@@ -845,25 +845,89 @@ jsBridge.registerHandler("getInfo", (data, responseCallback) => {
 
 两者都可通信，只要一方使用 registerHandler 注册了事件，另一方通过 callHandler 接受数据
 
-2. postMessage
+[postMessage 和 iframe](https://juejin.cn/post/7294425916549152783#heading-9)
+
+1. postMessage
    postMessage 可以安全地实现跨源通信。从广义上讲，一个窗口可以获得对另一个窗口的引用（比如  targetWindow = window.opener），然后在窗口上调用  targetWindow.postMessage()  方法分发一个  MessageEvent  消息。
 
-```js
+A:
+
+```html
 <input type="text" id="ipt" />
 <button id="btn">点击操作页面</button>
 <script>
-    btn.onclick = function(){
-         const w2 = window.open('http://127.0.0.1:5500/src/utils/index2.html');
+  btn.onclick = function () {
+    const w2 = window.open("http://127.0.0.1:5500/src/utils/index2.html");
 
-        w2.onload = function () {
-            w2.postMessage('页面一 发送====> 页面二', "http://127.0.0.1:5500")
-        }
-    }
+    w2.onload = function () {
+      w2.postMessage("页面一 发送====> 页面二", "http://127.0.0.1:5500");
+    };
+  };
 
-    window.addEventListener('message',function(e){
-        console.log(e.data);
-        ipt.value = e.data;
-    })
+  window.addEventListener("message", function (e) {
+    console.log(e.data);
+    ipt.value = e.data;
+  });
+</script>
+```
 
+B:
+
+```html
+<h2 id="h2">标题二</h2>
+<button id="btn">点击</button>
+
+<script>
+  const parentWindow = window.opener;
+  /* 如果是从 http://127.0.0.1:5500 中的某个页面将B页面打开，那么就能成功发送跨文档信息
+     如果讲此处的URI换成"*"，就意味着任何网页打开B页面，都能收到B页面传输的信息
+     */
+  btn.onclick = function () {
+    parentWindow.postMessage(h2.innerHTML, "http://127.0.0.1:5500");
+  };
+  window.addEventListener("message", function (e) {
+    console.log(e.data);
+    ipt.value = e.data;
+  });
+</script>
+```
+
+1. iframe:
+   父:
+
+```html
+<iframe
+  src="http://127.0.0.1:5500/src/utils/index2.html"
+  frameborder="1"
+  width="100%"
+  height="500px"
+  id="Bframe"
+></iframe>
+
+<script>
+  window.onload = () => {
+    let frame = window.frames[0];
+    frame.postMessage("父====>子", "http://127.0.0.1:5500");
+  };
+  window.addEventListener("message", function (e) {
+    console.log("父接受数据", e.data);
+  });
+</script>
+```
+
+子:
+
+```html
+<input type="text" id="ipt" />
+<button id="frameBtn">iframe点击</button>
+
+<script>
+  frameBtn.onclick = function () {
+    window.top.postMessage(h2.innerHTML, "http://127.0.0.1:5500");
+  };
+  window.addEventListener("message", function (e) {
+    console.log(e.data);
+    ipt.value = e.data;
+  });
 </script>
 ```
