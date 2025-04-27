@@ -931,3 +931,83 @@ B:
   });
 </script>
 ```
+
+## 二十四、js 实现函数重载
+
+1.  JQuery 实现
+
+```js
+// 实现
+function addMethod(object, name, fn) {
+  const old = object[name];
+  object[name] = function (...args) {
+    if (args.length === fn.length) {
+      return fn.apply(this, args);
+    } else if (typeof old === "function") {
+      return old.apply(this, args);
+    }
+  };
+}
+// 使用
+const searcher = {};
+
+addMethod(searcher, "getUsers", () => {
+  console.log("查询所有用户");
+});
+addMethod(searcher, "getUsers", (name = "a") => {
+  console.log("按照姓名查询用户");
+});
+addMethod(searcher, "getUsers", (firstName, sex) => {
+  console.log("按照姓名和性别查询用户");
+});
+searcher.getUsers();
+```
+
+**局限性**：
+
+- 只能是对象的方法重载。
+- 只能实现函数参数个数的重载，不能实现函数参数类型的重载。
+- 参数默认值会判断失败。
+
+2. js 实现
+
+```js
+// 实现
+function createOverload() {
+  const fnMap = new Map();
+  function overload(...args) {
+    const key = args.map((it) => typeof it).join(",");
+    const fn = fnMap.get(key);
+    if (!fn) {
+      throw new TypeError("没有找到对应的实现函数");
+    }
+    return fn.apply(this, args);
+  }
+  overload.addImpl = function (...args) {
+    const fn = args.pop();
+    if (typeof fn !== "function") {
+      throw new TypeError("最后一个参数必须是函数");
+    }
+    const key = args.join(",");
+    fnMap.set(key, fn);
+  };
+  return overload;
+}
+// 使用
+const getUsers = createOverload();
+getUsers.addImpl(() => {
+  console.log("查询所有用户");
+});
+const searchPage = (page, size = 10) => {
+  console.log("分页查询用户");
+};
+getUsers.addImpl("number", searchPage);
+getUsers.addImpl("number", "number", searchPage);
+getUsers.addImpl("string", (name = "a") => {
+  console.log("按照姓名查询用户");
+});
+getUsers.addImpl("string", "string", (firstName, sex) => {
+  console.log("按照姓名和性别查询用户");
+});
+getUsers();
+```
