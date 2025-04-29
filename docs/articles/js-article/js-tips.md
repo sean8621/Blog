@@ -75,123 +75,123 @@ console.log(Object.prototype.toString.call(arr) === "[object Array]"); // 输出
 
 1. 成员访问和计算属性
 
-`.`（点操作符）
+   `.`（点操作符）
 
-`[]`（计算属性）
+   `[]`（计算属性）
 
-`new`（创建实例）
+   `new`（创建实例）
 
-`()`（函数调用）
+   `()`（函数调用）
 
-`new.target`（在构造函数中使用）
+   `new.target`（在构造函数中使用）
 
 2. 新的运算符（ES6+）
 
-`...`（展开运算符）
+   `...`（展开运算符）
 
-`super`（调用父类的构造函数）
+   `super`（调用父类的构造函数）
 
 3. 递增和递减
 
-`++`（递增）
+   `++`（递增）
 
-`--`（递减）
+   `--`（递减）
 
 4. 一元运算符
 
-`delete`
+   `delete`
 
-`void`
+   `void`
 
-`typeof`
+   `typeof`
 
-`+`（一元加）
+   `+`（一元加）
 
-`-`（一元减）
+   `-`（一元减）
 
-`~`（位非）
+   `~`（位非）
 
-`!`（逻辑非）
+   `!`（逻辑非）
 
 5. 乘法、除法和取模
 
-`\*`（乘法）
+   `\*`（乘法）
 
-`/`（除法）
+   `/`（除法）
 
-`%`（取模）
+   `%`（取模）
 
 6. 加法和减法
 
-`+`（加法）
+   `+`（加法）
 
-`-`（减法）
+   `-`（减法）
 
 7. 小于、大于和相等比较
 
-`<`（小于）
+   `<`（小于）
 
-`>` （大于）
+   `>` （大于）
 
-`<=`（小于等于）
+   `<=`（小于等于）
 
-`>=`（大于等于）
+   `>=`（大于等于）
 
-`in`（属性存在）
+   `in`（属性存在）
 
-`instanceof`（实例检查）
+   `instanceof`（实例检查）
 
 8. 等号
 
-`==`（等于）
+   `==`（等于）
 
-`!=`（不等于）
+   `!=`（不等于）
 
-`===`（严格等于）
+   `===`（严格等于）
 
-`!==`（严格不等于）
+   `!==`（严格不等于）
 
 9. 按位与
 
-`&`（按位与）
+   `&`（按位与）
 
 10. 按位异或
 
-`^`（按位异或）
+    `^`（按位异或）
 
 11. 按位或
 
-`|`（按位或）
+    `|`（按位或）
 
 12. 逻辑与
 
-`&&`（逻辑与）
+    `&&`（逻辑与）
 
 13. 逻辑或
 
-`||`（逻辑或）
+    `||`（逻辑或）
 
 14. 可选链（ES2020+）
 
-`?.`（可选链操作符）
+    `?.`（可选链操作符）
 
 15. 空值合并运算符（ES2020+）
 
-`??`（空值合并操作符）
+    `??`（空值合并操作符）
 
 16. 条件（三元）运算符
 
-`?:`（条件运算符）
+    `?:`（条件运算符）
 
 17. 赋值运算符
 
-`=`（赋值）
+    `=`（赋值）
 
-`+=`、`-=`、`\*=`、`/=`、`%=`、`<<=`、`>>=`、`>>>=`、`&=`、`^=`、`|=`等复合赋值运算符。
+    `+=`、`-=`、`\*=`、`/=`、`%=`、`<<=`、`>>=`、`>>>=`、`&=`、`^=`、`|=`等复合赋值运算符。
 
 18. 逗号运算符
 
-`,`（逗号运算符，通常用于分隔多个表达式在单个语句中执行，但优先级最低，因为它主要用于分隔表达式而不是控制运算顺序。）
+    `,`（逗号运算符，通常用于分隔多个表达式在单个语句中执行，但优先级最低，因为它主要用于分隔表达式而不是控制运算顺序。）
 
 ## 六、sessionStorage、localStorage、cookie
 
@@ -489,13 +489,17 @@ if (y) {
 ## 十七、选择题
 
 ```js
-output(typeof (function() {output(“Hello World!”)})());
+output(
+  typeof (function () {
+    output("Hello World!");
+  })()
+);
 // Hello World! undefined
 ```
 
 - 逐步分析执行过程：
 
-1. 首先,定义了一个匿名函数 function() {output("Hello World!")}
+1. 首先,定义了一个匿名函数 `function() {output("Hello World!")}`
 2. 通过末尾的()立即执行这个函数
 3. 函数执行时会先输出"Hello World!"
 4. 函数没有显式的 return 语句,所以返回 undefined
@@ -1011,3 +1015,358 @@ getUsers.addImpl("string", "string", (firstName, sex) => {
 });
 getUsers();
 ```
+
+## 二十五、js 编译时与运行时
+
+1. 编译时：
+
+   - webpack 等工具把 react、vue 编译为 js 的过程
+   - Vue 是一个运行时 + 编译时的框架，在编译时把浏览器看不懂的代码转化为 JS 代码，在运行时创建虚拟 DOM，做 diff 对比，更新真实 DOM 等等操作。
+
+   1. 浏览器环境：
+
+   - **解析（Parsing）**：浏览器接收到 JavaScript 代码后，首先进行语法解析，将代码转换成一种可以被计算机理解的格式，通常是抽象语法树（AST）
+   - **转换（Transforming）**：接下来，编译器或解释器可能会对 AST 进行优化，比如变量提升（hoisting）、死代码消除等。
+   - **生成代码（Code Generation）**：最后，将优化后的 AST 转换成机器码或者中间码（如字节码），这个过程称为代码生成。对于现代浏览器，这一步通常会生成字节码，然后由即时编译器（JIT）将其编译成机器码，以提高执行效率。
+
+   2. 服务器环境：
+
+   - **V8 引擎**：Node.js 使用 Google 的 V8 JavaScript 引擎来执行 JavaScript 代码。V8 引擎同样会经历解析、转换和生成代码的过程。
+   - **即时编译（JIT）**：V8 引擎使用即时编译技术来优化代码执行。这意味着它会监控代码的运行情况，并根据需要动态地优化代码。
+
+2. 运行时：
+   - 浏览器解析 JS 代码，执行 JS 代码。
+   - **全局执行上下文**：当脚本或函数被调用时，会创建一个全局执行上下文或函数执行上下文。每个执行上下文都有自己的变量环境、词法环境等。
+   - **作用域链**：在运行时，JavaScript 通过作用域链来查找变量和函数。作用域链是一系列对象的有序列表，这些对象代表了当前执行上下文中的变量和函数的作用域。
+   - **垃圾回收**：运行时还包括垃圾回收机制，用于自动管理内存，释放不再使用的内存空间。
+
+## 二十六、js 在浏览器环境与服务器环境（node.js）的区别
+
+1. 运行环境
+   - **浏览器环境**：浏览器环境指的是在浏览器中运行的 JavaScript 代码。它具有 DOM（文档对象模型）、BOM（浏览器对象模型）等浏览器对象，以及一些用于与浏览器交互的 API，如 XMLHttpRequest、fetch、WebSocket 等。
+   - **服务器环境**：服务器环境指的是在 Node.js 中运行的 JavaScript 代码。Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行时环境，它提供了 Node.js 的核心模块和 API，如 fs、http、path 等。Node.js 运行时环境提供了一些 Node.js 特有的 API，如 require()、module 等。
+2. 全局对象
+   - **浏览器环境**：在浏览器中运行的 JavaScript 代码，全局对象是 window，提供了访问浏览器窗口、文档和其他浏览器功能的 API，如 document、navigator 等 ‌。
+   - **服务器环境**：在 Node.js 中运行的 JavaScript 代码，全局对象是 global，提供了 Node.js 特有的 API，如 require()、module 等。
+3. 模块系统
+   - **浏览器环境**：使用 ES Modules（ES6 模块），通过 import 和 export 语法实现模块化。现代浏览器广泛支持 ES Modules，但在旧版本浏览器中可能需要使用构建工具（如 Webpack）进行转换和兼容性处理 ‌。
+   - **服务器环境**：Node.js 使用 CommonJS 模块系统，通过 require 和 module.exports 进行模块化开发。此外，Node.js 也支持 ES6 模块，可以通过.mjs 扩展名或在 package.json 中设置"type": "module"来使用 ‌。
+4. 内置模块和 API
+   - **浏览器环境**：提供 DOM 操作相关的 API（如 document、Element、XMLHttpRequest、Fetch API 等）以及许多 Web API（如 Canvas、WebGL、Web Audio 等），用于操作网页内容和实现丰富的客户端功能 ‌。
+   - **服务器环境**‌：Node.js 提供了丰富的内置模块（如 http、fs、path 等）和第三方模块（通过 npm 安装），可以进行文件操作、网络通信、加密解密、操作系统任务等。
+5. 事件循环和异步处理
+   - **浏览器环境** ‌：JavaScript 在浏览器中运行采用事件循环机制，包括宏任务（如 setTimeout、setInterval）和微任务（如 Promise、Async/Await）‌。
+   - **服务器环境**：Node.js 的事件循环机制与浏览器类似，但它还支持一些 Node.js 特有的异步处理方式，支持高效的非阻塞 I/O 操作和网络请求处理 ‌，如事件发射器（EventEmitter）、流（Stream）等。
+
+## 二十七、前端工程化理解
+
+‌ **前端工程化**是指将前端开发中的项目管理、构建、测试、部署等环节进行规范化和自动化的开发方式。其核心目的是提高开发效率、提升代码质量和可维护性，减少出错率和重复劳动 ‌
+
+### 核心概念
+
+1. **模块化**：将代码拆分为独立的模块，通过导入/导出机制实现代码复用。常见的模块化方案有 ES6 模块、CommonJS 和 AMD 等 ‌。
+
+   解决的问题：
+
+   - 避免全局变量污染
+   - 代码依赖关系清晰（通过 import/export）
+
+2. **组件化** ：讲 UI 拆分成可复用的独立组件，每个组件包含模板、逻辑和样式
+
+   解决的问题：
+
+   - 提高代码复用性和可维护性
+
+3. **打包构建**：将多个模块组合起来，生成可以在浏览器中运行的代码。常见的打包构建工具有 Webpack、Rollup 等 ‌。
+4. **自动化测试**：使用自动化工具对代码进行测试，确保在开发过程中不会出现问题，并在部署前进行严格测试。自动化测试包括单元测试和端到端测试 ‌。
+5. **持续集成与持续部署（CI/CD）**：设置自动化流程，确保每次代码变更都能经过严格的测试并顺利上线，减少人工操作带来的风险 ‌。
+
+   解决问题：
+
+   - 手动 FTP 上传代码
+   - 部署过程人为出错
+
+6. **版本控制**：利用 Git 或其他版本控制系统跟踪代码变化历史，方便团队成员协作开发 ‌。
+7. **静态代码分析**：通过工具如 ESLint、Prettier 进行静态代码分析，帮助开发者遵循编码规范，提前发现潜在问题 ‌。
+8. **性能优化**：采取措施优化 Web 应用的加载速度和运行性能，如图片懒加载、服务端渲染（SSR）、客户端缓存策略等 ‌。
+9. **文档生成与维护**：保持良好的文档习惯，包括 API 文档、架构设计文档、开发指南等，便于新人快速上手和后续维护 ‌。
+10. **依赖管理**：合理管理和更新第三方库依赖，确保项目使用的库是最新的同时避免引入不必要的安全漏洞 ‌。
+
+## 二十八、SSR
+
+1. 优劣势
+
+   优势：
+
+   - **提升性能** ‌：SSR 减少了客户端的渲染负担，加快了首屏加载速度。
+   - ‌**SEO 优化** ‌：生成的 HTML 包含完整内容，便于搜索引擎抓取和索引，提升 SEO 效果。
+   - ‌**动态内容支持** ‌：确保依赖 JavaScript 渲染的页面在初始加载时内容完整呈现。
+   - **框架支持**‌：React 的 Next.js 和 Vue 的 Nuxt.js 等框架都支持 SSR‌
+
+   劣势：
+
+   - **开发复杂度较高**‌：由于涉及服务器和客户端的交互，调试和错误处理可能更复杂。
+   - **服务器负载**：在高并发情况下，服务器需要处理更多的渲染请求，可能增加服务器负担 ‌
+
+2. vue 中的 SSR 解决方案：Nuxt.js、Quasar、vite SSR
+3. 应用场景：
+   - **‌ 内容密集型网站**‌：如新闻、博客等需要 SEO 优化的网站。
+   - **性能要求高的应用**：如电商、社交平台等需要快速加载的应用 ‌
+
+## 二十九、ESModule 和 CommonJS 的区别
+
+1. 语法差异
+
+   ES 模块使用 import 和 export 关键字，而 CommonJS 使用 require 和 module.exports 或 exports。
+
+2. 加载方式
+
+   CommonJS 是同步加载，而 ES 模块在浏览器中是异步加载，在 Node.js 中也支持异步加载（通过 import() 动态导入）。
+
+3. 静态 vs 动态
+
+   ES 模块具有静态结构，在编译阶段就能确定依赖关系；而 CommonJS 可以在运行时动态加载模块。
+
+4. 适用场景
+
+   CommonJS 主要用于服务器端开发，尤其是在 Node.js 环境中；ES 模块既可以用于浏览器端，也可以用于服务器端，并且逐渐成为 JavaScript 模块系统的标准。
+
+[ESModule 和 CommonJS 的区别](https://blog.csdn.net/m0_57836225/article/details/145429977)
+
+## 三十、页面白屏排查
+
+### 一、什么是页面白屏？
+
+- 前端白屏是指用户打开网页时，页面未能正常加载或渲染，导致浏览器显示一片空白。
+- 一般情况下 是由 JS 执行错误 / 资源加载失败 / 网络问题 / 渲染逻辑错误 引起的。
+- 在单页面应用中（SPA），前端白屏问题会变得更加复杂，可能导致用户无法看到任何有效内容。
+- 而解决白屏问题的关键是：快速定位并修复错误，确保资源正确加载和渲染。
+
+> 白屏问题本质上是浏览器渲染流水线的断裂，从 DNS 解析 -> 资源加载 -> JS 执行 -> DOM 构建 -> 渲染树生成 -> 页面绘制的完整链路中，任一环节的异常都可能导致最终呈现的空白。
+
+### 二、排查思路
+
+<img src="./assets/empty-screen.png" width="600" height="600" alt="empty-screen" />
+
+> 看完这么复杂的排查流程, 来思考下一个页面白屏 真的值得如此认真对待吗? (问问那些大厂 c 端的大佬们就知道了)
+>
+> 用户体量越大, 页面白屏时间能带来的负面影响就越能呈现指数级增长, 比如说:
+>
+> - 业务层面：电商场景下每增加 1 秒白屏时间转化率下降 7%
+> - 技术层面：可能引发雪崩效应（如 CDN 故障导致全站不可用）
+> - 体验层面：用户留存率下降 40%+
+
+1. 第一阶段：快速定位问题层级
+   浏览器控制台四步诊断法：
+
+```js
+// Step 1 - 检测文档加载阶段
+console.log(
+  "DOMContentLoaded:",
+  performance.timing.domContentLoadedEventEnd -
+    performance.timing.navigationStart
+);
+console.log(
+  "Load Event:",
+  performance.timing.loadEventEnd - performance.timing.navigationStart
+);
+// Step 2 - 检查关键错误
+window.addEventListener(
+  "error",
+  (e) => {
+    console.error("Global Error:", e.message, e.filename, e.lineno);
+  },
+  true
+);
+// Step 3 - 验证 DOM 挂载点（React/Vue 重点）
+const rootNode = document.getElementById("root");
+if (!rootNode || rootNode.childNodes.length === 0) {
+  console.error("挂载节点异常:", rootNode);
+}
+// Step 4 - 网络状态检测
+fetch("/health-check").catch((e) => {
+  console.error("网络连通性异常:", e);
+});
+```
+
+**典型场景**：
+
+- Vue/React 未捕获的初始化错误导致 root 节点为空。
+- 浏览器插件注入的脚本引发全局错误。
+
+2. 第二阶段：网络层深度检测
+
+   **(1)关键资源瀑布流分析**
+
+   使用 Chrome DevTools 的 Network 面板：
+
+   1. 过滤 JS|CSS|IMG 类型资源
+   2. 检查关键资源的：
+      1. HTTP 状态码（重点 404/403/500）
+      2. Timing 明细（TTFB 是否异常）
+   3. 右键资源 → Copy as cURL 验证 CDN 可用性
+
+   **(2)CDN 故障专项排查**
+
+   ```bash
+     # 多节点探测（需安装 httpie）
+     http https://cdn.example.com/main.js --verify=no \ --headers \ --proxy=http:http://1.1.1.1:8080 \
+     # 切换不同代理节点
+     --download > /dev/null
+     # DNS 污染检测
+     nslookup cdn.example.com 8.8.8.8 # 对比不同 DNS 结果 nslookup cdn.example.com 114.114.114.114
+   ```
+
+   **经典案例：**
+
+   某站点因 CDN 节点未同步最新证书，导致部分用户浏览器拦截 HTTPS 请求引发白屏
+
+   **(3)资源完整性校验(SRI 实战)**
+
+   ```html
+   <!-- 带 SRI 校验的资源加载 -->
+   <script
+     src="https://cdn.example.com/react.production.min.js"
+     integrity="sha384-xxxx"
+     crossorigin="anonymous"
+   ></script>
+   ```
+
+   **排查要点：**
+
+   - 控制台出现 Integrity checksum failed 错误
+   - 比对服务器资源 hash 值：
+     ```bash
+       openssl dgst -sha384 -binary react.production.min.js | openssl base64 -A
+     ```
+
+3. 第三阶段：渲染层故障定位
+
+   **(1)SPA 框架特有陷阱**
+
+   **Vue**
+
+   ```js
+   // 若#app节点不存在，静默失败！
+   new Vue({ render: (h) => h(App) }).$mount("#app");
+   ```
+
+   **解决方案**
+
+   ```js
+   const root = document.getElementById("app");
+   if (!root) {
+     document.write("容器丢失，降级显示基础内容");
+   } else {
+     new Vue({ render: (h) => h(App) }).$mount(root);
+   }
+   ```
+
+   **React**
+
+   ```js
+   //错误边界组件（捕获渲染层错误）
+   class ErrorBoundary extends React.Component {
+     componentDidCatch(error, info) {
+       Sentry.captureException(error);
+       window.location.reload(); //降级策略
+     }
+     render() {
+       return this.props.children;
+     }
+   }
+   //使用方式
+   <ErrorBoundary>
+     <App />
+   </ErrorBoundary>;
+   ```
+
+   **(2)CSS 渲染阻塞**
+
+   **检测方法**
+
+   1. 浏览器地址栏输入`about:blank`清空页面
+   2. 逐步加载 CSS 文件，观察布局变化
+   3. 检查`z-index`异常导致元素不可见
+
+   **典型案例**
+
+   某页面因 body { display: none !important; } 内联样式导致白屏
+
+4. 第四阶段：性能维度深度分析
+
+   **(1)主线程阻塞检测**
+
+   **Long Tasks API：**
+
+   ```js
+   const observer = new PerformanceObserver((list) => {
+     list.getEntries().forEach((entry) => {
+       if (entry.duration > 50) {
+         console.warn("主线程阻塞：", entry);
+       }
+     });
+   });
+   observer.observe({ entryTypes: ["longtask"] });
+   ```
+
+   **(2)内存泄漏追踪**
+
+   **Chrome Memory 面板操作：**
+
+   1. 生成堆快照（Heap Snapshot）
+   2. 筛选 DetaChed Dom tree 检查未释放节点
+   3. 对比多次快照，查找持续增长的对象
+
+   **典型案例**
+
+未销毁的 WebSocket 监听器持续累积导致内存溢出
+
+### (3) 关键指标阈值
+
+| 指标           | 警告阈值 | 严重阈值 | 测量工具                |
+| -------------- | -------- | -------- | ----------------------- |
+| FCP            | >2s      | >4s      | Lighthouse              |
+| JS 总执行时间  | >3s      | >5s      | Chrome Performance 面板 |
+| 未压缩资源占比 | >30%     | >50%     | Webpack Bundle Analyzer |
+
+5. 第五阶段：环境特异性问题
+
+   **(1)浏览器兼容性**
+
+   ```js
+   // 使用 Feature Detection 代替 UA 检测
+   if (!("IntersectionObserver" in window)) {
+     loadPolyfill("intersection-observer").then(initApp);
+   }
+   ```
+
+   **(2)运营商劫持机制**
+
+   ```js
+   // 检查页面是否被注入第三方脚本
+   const thirdPartyScripts = Array.from(document.scripts).filter(
+     (s) => !s.src.includes(window.location.hostname)
+   );
+   if (thirdPartyScripts.length > 0) {
+     reportException("运营商劫持", thirdPartyScripts);
+   }
+   ```
+
+   **(3)本地环境干扰**
+
+   - 禁用所有浏览器插件（广告拦截器）
+   - 清楚 Service Worker 缓存
+
+   ```js
+   navigator.serviceWorker.getRegistrations().then((regs) => {
+     regs.forEach((reg) => reg.unregister());
+   });
+   ```
+
+   **(4)兜底策略**
+
+   - 用户操作视频录制（接入 rrweb 等工具, 大公司监控体系下一般都有用到, 没有用上的建议也可以加上）
+   - 特定设备远程调试（使用 Chrome Remote Debugging）
+
+[白屏检测方案](https://blog.csdn.net/W11929311582/article/details/147333409)
