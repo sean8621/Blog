@@ -1125,7 +1125,7 @@ getUsers();
 
 3. 静态 vs 动态
 
-   ES 模块具有静态结构，在编译阶段就能确定依赖关系；而 CommonJS 可以在运行时动态加载模块。
+   ES 模块具有静态结构，在编译阶段就能确定依赖关系,也是导入导出语句必须在模块的最顶层的原因，需要在编译时解析；而 CommonJS 可以在运行时动态加载模块。
 
 4. 适用场景
 
@@ -1370,3 +1370,239 @@ fetch("/health-check").catch((e) => {
    - 特定设备远程调试（使用 Chrome Remote Debugging）
 
 [白屏检测方案](https://blog.csdn.net/W11929311582/article/details/147333409)
+
+## 三十一、nodejs 实现并发
+
+在 Node.js 中实现并发可以通过多种方式，主要利用了 JavaScript 的非阻塞 I/O 和事件驱动模型。以下是几种常见的方法：
+
+1. **异步回调函数**：
+   Node.js 中的许多 I/O 操作都是异步的，通过回调函数来处理操作完成后的逻辑。这是最早的处理并发的方式。
+
+   ```javascript
+   const fs = require("fs");
+
+   fs.readFile("file1.txt", "utf8", (err, data) => {
+     if (err) throw err;
+     console.log(data);
+   });
+
+   fs.readFile("file2.txt", "utf8", (err, data) => {
+     if (err) throw err;
+     console.log(data);
+   });
+   ```
+
+2. **Promise**：
+   Promise 提供了一种更清晰的方式来处理异步操作，避免了回调地狱的问题。
+
+   ```javascript
+   const fs = require("fs").promises;
+
+   async function readFiles() {
+     try {
+       const data1 = await fs.readFile("file1.txt", "utf8");
+       console.log(data1);
+       const data2 = await fs.readFile("file2.txt", "utf8");
+       console.log(data2);
+     } catch (err) {
+       console.error(err);
+     }
+   }
+
+   readFiles();
+   ```
+
+3. **async/await**：
+   `async/await` 是基于 Promise 的语法糖，使异步代码看起来更像同步代码，便于理解和维护。
+
+   ```javascript
+   const fs = require("fs").promises;
+
+   async function readFiles() {
+     try {
+       const data1 = await fs.readFile("file1.txt", "utf8");
+       console.log(data1);
+       const data2 = await fs.readFile("file2.txt", "utf8");
+       console.log(data2);
+     } catch (err) {
+       console.error(err);
+     }
+   }
+
+   readFiles();
+   ```
+
+4. **EventEmitter**：
+   Node.js 提供了 `EventEmitter` 类，可以用于创建自定义事件，从而实现并发处理。
+
+   ```javascript
+   const EventEmitter = require("events");
+
+   class MyEmitter extends EventEmitter {}
+
+   const myEmitter = new MyEmitter();
+
+   myEmitter.on("event", (data) => {
+     console.log(data);
+   });
+
+   myEmitter.emit("event", "Hello, World!");
+   ```
+
+5. **Child Processes**：
+   对于 CPU 密集型任务，可以使用 `child_process` 模块创建子进程，从而实现多线程并发。
+
+   ```javascript
+   const { fork } = require("child_process");
+
+   const child = fork("child.js");
+
+   child.send("Hello from parent");
+
+   child.on("message", (message) => {
+     console.log(`Message from child: ${message}`);
+   });
+   ```
+
+6. **Worker Threads**：
+   Node.js 10.5.0 引入了 Worker Threads，允许在 Node.js 中创建线程，从而实现真正的多线程并发。
+
+   ```javascript
+   // main.js
+   const {
+     Worker,
+     isMainThread,
+     parentPort,
+     workerData,
+   } = require("worker_threads");
+
+   if (isMainThread) {
+     const worker = new Worker(__filename, { workerData: { start: 1 } });
+     worker.on("message", (message) => {
+       console.log(`Worker: ${message}`);
+     });
+   } else {
+     parentPort.postMessage(workerData.start + 1);
+   }
+   ```
+
+7. **Cluster 模块**：
+   `cluster` 模块允许你创建多个 Node.js 进程，充分利用多核 CPU 的能力。
+
+   ```javascript
+   const cluster = require("cluster");
+   const http = require("http");
+   const numCPUs = require("os").cpus().length;
+
+   if (cluster.isMaster) {
+     console.log(`Master ${process.pid} is running`);
+
+     // Fork workers.
+     for (let i = 0; i < numCPUs; i++) {
+       cluster.fork();
+     }
+
+     cluster.on("exit", (worker, code, signal) => {
+       console.log(`worker ${worker.process.pid} died`);
+     });
+   } else {
+     // Workers can share any TCP connection
+     // In this case it is an HTTP server
+     http
+       .createServer((req, res) => {
+         res.writeHead(200);
+         res.end("hello world\n");
+       })
+       .listen(8000);
+
+     console.log(`Worker ${process.pid} started`);
+   }
+   ```
+
+## 三十二、框架与原生的好处：
+
+使用 JavaScript 框架（如 React、Vue、Angular 等）相比于原生 JavaScript 带来了许多好处，这些好处主要体现在开发效率、代码可维护性、性能优化和社区支持等方面。以下是详细的对比：
+
+### 1. **开发效率**
+
+- **组件化开发**：
+
+  - **框架**：提供组件化的开发方式，可以将 UI 分解为独立的、可复用的组件。这不仅提高了开发效率，还使得代码更易于管理和维护。
+  - **原生 JavaScript**：需要手动管理组件的生命周期和状态，开发效率相对较低。
+
+- **快速开发**：
+  - **框架**：提供了丰富的内置功能和工具，如路由、状态管理、表单处理等，可以快速搭建应用。
+  - **原生 JavaScript**：需要手动实现这些功能，开发周期较长。
+
+### 2. **代码可维护性**
+
+- **结构化代码**：
+
+  - **框架**：遵循一定的开发规范和最佳实践，代码结构清晰，易于理解和维护。
+  - **原生 JavaScript**：缺乏统一的规范，代码结构可能较为混乱，难以维护。
+
+- **模块化**：
+  - **框架**：支持模块化开发，可以将代码拆分为多个模块，便于管理和维护。
+  - **原生 JavaScript**：需要手动管理模块依赖关系，代码组织较为困难。
+
+### 3. **性能优化**
+
+- **虚拟 DOM**：
+
+  - **框架**：如 React 使用虚拟 DOM 技术，通过最小化 DOM 操作来提高性能。
+  - **原生 JavaScript**：直接操作 DOM，频繁的 DOM 操作可能导致性能问题。
+
+- **懒加载**：
+  - **框架**：支持懒加载和代码分割，可以按需加载模块，减少初始加载时间。
+  - **原生 JavaScript**：需要手动实现懒加载和代码分割，较为复杂。
+
+### 4. **社区支持和生态系统**
+
+- **丰富的插件和库**：
+
+  - **框架**：拥有庞大的社区和丰富的插件生态系统，可以快速集成第三方库和插件。
+  - **原生 JavaScript**：虽然也有许多库和工具，但不如框架生态系统丰富。
+
+- **文档和教程**：
+  - **框架**：提供了详细的文档和教程，便于学习和使用。
+  - **原生 JavaScript**：虽然也有大量的文档和教程，但不如框架文档系统和全面。
+
+### 5. **状态管理**
+
+- **内置状态管理**：
+  - **框架**：如 Redux、Vuex 等状态管理库，可以方便地管理应用的状态。
+  - **原生 JavaScript**：需要手动实现状态管理，较为复杂。
+
+### 6. **双向数据绑定**
+
+- **双向数据绑定**：
+  - **框架**：如 Vue 提供了双向数据绑定，可以简化数据同步。
+  - **原生 JavaScript**：需要手动实现数据绑定，较为繁琐。
+
+### 7. **路由管理**
+
+- **内置路由**：
+  - **框架**：如 React Router、Vue Router 等，提供了强大的路由管理功能。
+  - **原生 JavaScript**：需要手动实现路由管理，较为复杂。
+
+### 8. **开发工具和调试**
+
+- **开发工具**：
+  - **框架**：提供了丰富的开发工具和调试工具，如 React DevTools、Vue DevTools 等。
+  - **原生 JavaScript**：虽然也有开发工具，但不如框架提供的工具全面和强大。
+
+### 9. **跨平台开发**
+
+- **跨平台支持**：
+  - **框架**：如 React Native、Flutter 等，可以实现跨平台开发。
+  - **原生 JavaScript**：需要为不同平台编写不同的代码，开发成本较高。
+
+### 10. **安全性**
+
+- **内置安全机制**：
+  - **框架**：提供了防止 XSS、CSRF 等安全攻击的机制。
+  - **原生 JavaScript**：需要手动实现安全机制，较为复杂。
+
+### 总结
+
+使用 JavaScript 框架相比于原生 JavaScript，可以显著提高开发效率，简化代码管理，优化性能，并且拥有强大的社区支持和丰富的生态系统。然而，选择框架也需要根据项目的具体需求和团队的技术栈来决定。对于小型项目或简单的应用，原生 JavaScript 可能更为合适；而对于大型项目或复杂的业务逻辑，框架则提供了更好的解决方案。
