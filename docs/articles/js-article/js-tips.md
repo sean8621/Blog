@@ -1371,6 +1371,10 @@ fetch("/health-check").catch((e) => {
 
 [白屏检测方案](https://blog.csdn.net/W11929311582/article/details/147333409)
 
+### 埋点检测方案
+
+<img src="./assets/埋点方案.png" width="600" height="600" alt="empty-screen" />
+
 ## 三十一、nodejs 实现并发
 
 在 Node.js 中实现并发可以通过多种方式，主要利用了 JavaScript 的非阻塞 I/O 和事件驱动模型。以下是几种常见的方法：
