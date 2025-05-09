@@ -1,6 +1,6 @@
 # Vue3-ts 对接腾讯地图问题
 
-## 1.Wbe 端 Javascript API GL
+## 1.Web 端 Javascript API GL
 
 ### 1.1 vue3 ts 环境报错 DOMException: Failed to execute ‘postMessage’ on ‘Worker’: # could not be cloned.
 
