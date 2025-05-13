@@ -161,75 +161,75 @@ export default defineConfig({
             },
           ],
         },
-        {
-          text: "面试真题",
-          items: [
-            {
-              text: "JavaScript面试题",
-              link: "/articles/interview-article/js",
-            },
-            {
-              text: "CSS面试题",
-              link: "/articles/interview-article/css",
-            },
-            {
-              text: "ES6面试题",
-              link: "/articles/interview-article/es6",
-            },
-            {
-              text: "Vue2面试题",
-              link: "/articles/interview-article/vue2",
-            },
-            {
-              text: "Vue3面试题",
-              link: "/articles/interview-article/vue3",
-            },
-            {
-              text: "React面试题",
-              link: "/articles/interview-article/react",
-            },
-            {
-              text: "Node.js面试题",
-              link: "/articles/interview-article/node",
-            },
-            {
-              text: "小程序面试题",
-              link: "/articles/interview-article/miniprogram",
-            },
-            {
-              text: "HTTP面试题",
-              link: "/articles/interview-article/http",
-            },
-            {
-              text: "TypeScript面试题",
-              link: "/articles/interview-article/ts",
-            },
-            {
-              text: "Webpack面试题",
-              link: "/articles/interview-article/webpack",
-            },
-            {
-              text: "Git面试题",
-              link: "/articles/interview-article/git",
-            },
-            {
-              text: "Linux面试题",
-              link: "/articles/interview-article/linux",
-            },
-            {
-              text: "算法面试题",
-              link: "/articles/interview-article/algorithm",
-            },
-            {
-              text: "设计模式面试题",
-              link: "/articles/interview-article/design",
-            },
-            {
-              text: "深入学习",
-              link: "/articles/interview-article/深入学习",
-            },
-          ],
-        },
+        // {
+        //   text: "面试真题",
+        //   items: [
+        //     {
+        //       text: "JavaScript面试题",
+        //       link: "/articles/interview-article/js",
+        //     },
+        //     {
+        //       text: "CSS面试题",
+        //       link: "/articles/interview-article/css",
+        //     },
+        //     {
+        //       text: "ES6面试题",
+        //       link: "/articles/interview-article/es6",
+        //     },
+        //     {
+        //       text: "Vue2面试题",
+        //       link: "/articles/interview-article/vue2",
+        //     },
+        //     {
+        //       text: "Vue3面试题",
+        //       link: "/articles/interview-article/vue3",
+        //     },
+        //     {
+        //       text: "React面试题",
+        //       link: "/articles/interview-article/react",
+        //     },
+        //     {
+        //       text: "Node.js面试题",
+        //       link: "/articles/interview-article/node",
+        //     },
+        //     {
+        //       text: "小程序面试题",
+        //       link: "/articles/interview-article/miniprogram",
+        //     },
+        //     {
+        //       text: "HTTP面试题",
+        //       link: "/articles/interview-article/http",
+        //     },
+        //     {
+        //       text: "TypeScript面试题",
+        //       link: "/articles/interview-article/ts",
+        //     },
+        //     {
+        //       text: "Webpack面试题",
+        //       link: "/articles/interview-article/webpack",
+        //     },
+        //     {
+        //       text: "Git面试题",
+        //       link: "/articles/interview-article/git",
+        //     },
+        //     {
+        //       text: "Linux面试题",
+        //       link: "/articles/interview-article/linux",
+        //     },
+        //     {
+        //       text: "算法面试题",
+        //       link: "/articles/interview-article/algorithm",
+        //     },
+        //     {
+        //       text: "设计模式面试题",
+        //       link: "/articles/interview-article/design",
+        //     },
+        //     {
+        //       text: "深入学习",
+        //       link: "/articles/interview-article/深入学习",
+        //     },
+        //   ],
+        // },
       ],
     },
 
