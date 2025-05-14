@@ -1680,3 +1680,10 @@ console.log(r); // [1, NaN, NaN]
    - React：React 的虚拟 DOM 在性能优化方面做了很多工作，它采用了高效的 diff 算法，在更新 DOM 时，会尽可能复用已有的 DOM 节点，减少实际的 DOM 操作，提高应用的性能。
   
    - Vue:Vue 的虚拟 DOM 实现相对简单直观，在进行 DOM diff（比较虚拟 DOM 的变化）时，会根据节点的类型和 key 值进行比较，快速找出需要更新的部分并进行渲染。
+
+## 三十七、如何提高webpack打包速度
+1. ESLint 删除无用代码
+2. 多线程打包（Webpack5.0 默认开启多线程打包,webpack4.0 需要安装thread-loader）
+3. 缓存
+4. noParse
+5. externals
