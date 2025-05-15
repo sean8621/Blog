@@ -1677,13 +1677,19 @@ console.log(r); // [1, NaN, NaN]
    - Vue：对于小型应用，Vue 的响应式系统可以很好地管理组件的状态。而对于大型应用，通常会使用 Vuex 作为状态管理模式。Vuex 采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。
 
 5. 虚拟 DOM
+
    - React：React 的虚拟 DOM 在性能优化方面做了很多工作，它采用了高效的 diff 算法，在更新 DOM 时，会尽可能复用已有的 DOM 节点，减少实际的 DOM 操作，提高应用的性能。
-  
+
    - Vue:Vue 的虚拟 DOM 实现相对简单直观，在进行 DOM diff（比较虚拟 DOM 的变化）时，会根据节点的类型和 key 值进行比较，快速找出需要更新的部分并进行渲染。
 
-## 三十七、如何提高webpack打包速度
+## 三十七、如何提高 webpack 打包速度
+
 1. ESLint 删除无用代码
-2. 多线程打包（Webpack5.0 默认开启多线程打包,webpack4.0 需要安装thread-loader）
+2. 多线程打包（Webpack5.0 默认开启多线程打包,webpack4.0 需要安装 thread-loader）
 3. 缓存
 4. noParse
 5. externals
+
+## 三十八、Service Worker 运用与实践
+
+[Service Worker 运用与实践](https://mp.weixin.qq.com/s/3Ep5pJULvP7WHJvVJNDV-g)
