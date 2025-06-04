@@ -51,7 +51,7 @@ console.log(Object.prototype.toString.call(arr) === "[object Array]"); // 输出
 4. `2 .toString()` 通过在数字和点号之间添加空格，可以帮助 JavaScript 解析器正确理解这是一个方法调用而不是小数点。这种写法语法正确且清晰。
 5. `(2).toString()`使用括号将数字括起来，可以明确地将其转换为对象，然后调用 toString()方法。这是最常用和最清晰的写法。
 
-- 开发中推荐使用 D 的写法，因为它最清晰易懂。
+- 开发中推荐使用(5)的写法，因为它最清晰易懂。
 
 ## 三、window.open
 
