@@ -1684,12 +1684,83 @@ console.log(r); // [1, NaN, NaN]
 
 ## 三十七、如何提高 webpack 打包速度
 
+## 三十七、如何提高 webpack 打包速度
+
 1. ESLint 删除无用代码
 2. 多线程打包（Webpack5.0 默认开启多线程打包,webpack4.0 需要安装 thread-loader）
-3. 缓存
-4. noParse
-5. externals
+3. 多线程打包（Webpack5.0 默认开启多线程打包,webpack4.0 需要安装 thread-loader）
+4. 缓存
+5. noParse
+6. externals
 
 ## 三十八、Service Worker 运用与实践
 
 [Service Worker 运用与实践](https://mp.weixin.qq.com/s/3Ep5pJULvP7WHJvVJNDV-g)
+
+## 三十九、XHR 与 Fetch 区别
+
+<img src="./assets/XHR与Fetch区别.png" width="600" height="600" alt="XHR与Fetch区别" />
+
+## 四十、题目
+
+```js
+console.log("start");
+for (var i = 0; i < 5; i++) {
+  setTimeout(() => {
+    console.log(i);
+  });
+}
+console.log("end");
+// start end 5 5 5 5 5
+```
+
+```js
+console.log("start");
+for (let i = 0; i < 5; i++) {
+  setTimeout(() => {
+    console.log(i);
+  });
+}
+console.log("end");
+// start end 0 1 2 3 4
+```
+
+解析：
+
+- `var的情况`：由于没有块级作用域，所有回调函数引用的是同一个变量，而这个变量在循环结束时的值是 5。
+- `let的情况`：块级作用域让每个迭代都有独立的变量，闭包保存了这些变量的值，所以回调函数能打印出预期的结果。
+
+## 四十一、题目
+
+```js
+async function run() {
+  console.log(1);
+  setTimeout(() => {
+    console.log(2);
+  });
+  const pro = new Promise((resolve, reject) => {
+    resolve(3);
+  }).then(() => {
+    console.log(4);
+    return 4;
+  });
+  setTimeout(() => {
+    console.log(5);
+  });
+  console.log(pro);
+  console.log(await pro);
+}
+run();
+// 1
+// Promise { <pending> }
+// 4
+// 4
+// 2
+// 5
+```
+
+解析：
+
+- 事件循环机制：同步代码 → 微任务队列 → 宏任务队列。
+- Promise 状态：new Promise 立即执行，.then() 回调进入微任务队列。
+- await 的作用：暂停函数执行，等待 Promise 解决后继续执行后续代码。
