@@ -1684,8 +1684,6 @@ console.log(r); // [1, NaN, NaN]
 
 ## 三十七、如何提高 webpack 打包速度
 
-## 三十七、如何提高 webpack 打包速度
-
 1. ESLint 删除无用代码
 2. 多线程打包（Webpack5.0 默认开启多线程打包,webpack4.0 需要安装 thread-loader）
 3. 多线程打包（Webpack5.0 默认开启多线程打包,webpack4.0 需要安装 thread-loader）
