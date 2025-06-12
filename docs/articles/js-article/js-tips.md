@@ -1764,3 +1764,30 @@ run();
 - 事件循环机制：同步代码 → 微任务队列 → 宏任务队列。
 - Promise 状态：new Promise 立即执行，.then() 回调进入微任务队列。
 - await 的作用：暂停函数执行，等待 Promise 解决后继续执行后续代码。
+
+## 四十二、题目
+
+```js
+setTimeout(() => {
+    console.log('A');
+},0)
+var obj = {
+    func: function () {
+        setTimeout(function () {
+            console.log('B')
+        }, 0);
+        return new Promise(function (resolve) {
+            console.log('C');
+            resolve();
+        })
+    }
+}
+obj.func().then(function () {
+    console.log('D');
+})
+console.log('E');
+// CEDAB
+```
+
+
+
