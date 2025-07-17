@@ -119,7 +119,7 @@ export default defineConfig({
             },
             {
               text: "全局开启分享功能",
-              link: "/articles/uniapp-article/gloable-share",
+              link: "/articles/uniapp-article/global-share",
             },
           ],
         },
