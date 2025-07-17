@@ -51,7 +51,7 @@ console.log(Object.prototype.toString.call(arr) === "[object Array]"); // 输出
 4. `2 .toString()` 通过在数字和点号之间添加空格，可以帮助 JavaScript 解析器正确理解这是一个方法调用而不是小数点。这种写法语法正确且清晰。
 5. `(2).toString()`使用括号将数字括起来，可以明确地将其转换为对象，然后调用 toString()方法。这是最常用和最清晰的写法。
 
-- 开发中推荐使用 D 的写法，因为它最清晰易懂。
+- 开发中推荐使用(5)的写法，因为它最清晰易懂。
 
 ## 三、window.open
 
@@ -1681,8 +1681,6 @@ console.log(r); // [1, NaN, NaN]
    - React：React 的虚拟 DOM 在性能优化方面做了很多工作，它采用了高效的 diff 算法，在更新 DOM 时，会尽可能复用已有的 DOM 节点，减少实际的 DOM 操作，提高应用的性能。
 
    - Vue:Vue 的虚拟 DOM 实现相对简单直观，在进行 DOM diff（比较虚拟 DOM 的变化）时，会根据节点的类型和 key 值进行比较，快速找出需要更新的部分并进行渲染。
-
-## 三十七、如何提高 webpack 打包速度
 
 ## 三十七、如何提高 webpack 打包速度
 
