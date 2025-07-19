@@ -47,6 +47,14 @@ export default defineConfig({
               text: "Vue3-ts 对接腾讯地图问题",
               link: "/articles/vue-article/vue3-ts-txmap",
             },
+            {
+              text: "双向绑定造成的效率问题",
+              link: "/articles/vue-article/双向绑定造成的效率问题",
+            },
+            {
+              text: "基于computed的缓存方法",
+              link: "/articles/vue-article/基于computed的缓存方法",
+            },
           ],
         },
         {
@@ -116,6 +124,10 @@ export default defineConfig({
             {
               text: "进度条动画",
               link: "/articles/uniapp-article/breath-animation",
+            },
+             {
+              text: "aichat打字机效果",
+              link: "/articles/uniapp-article/ai-chat-typewriter",
             },
             {
               text: "全局开启分享功能",
