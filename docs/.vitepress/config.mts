@@ -55,6 +55,10 @@ export default defineConfig({
               text: "基于computed的缓存方法",
               link: "/articles/vue-article/基于computed的缓存方法",
             },
+            {
+              text: "为什么需要虚拟dom",
+              link: "/articles/vue-article/为什么需要虚拟dom",
+            },
           ],
         },
         {

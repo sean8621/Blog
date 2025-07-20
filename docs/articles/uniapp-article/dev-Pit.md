@@ -80,3 +80,20 @@ background-image: linear-gradient(to right, #33f38d8a, #6dd5ed00);
 ```css
 background-image: linear-gradient(90deg, #33f38d8a 30%, #6dd5ed00 100%);
 ```
+
+
+## 5. 跨页面传值 uni.$emit 和 uni.$on 坑
+
+uniapp中可以使用uni.$emit和uni.$on进行跨页面传值，但是需要注意以下几点：
+1. 都属于全局跨页面传参,所以需要在$on的页面中，onUnload生命周期中，调用$off方法，否则会造成内存泄漏。
+
+## 6. 微信小程序和H5的弹窗滚动穿透解决
+1. 解决电脑端长按鼠标拖拽滚动，即手机端的触屏滑屏滚动穿透问题
+
+- 电脑端：在`scroll-view`添加阻止默认行为事件`@touchmove.stop.prevent="() => {}"`
+
+- 手机端：增加css属性，`overscroll-behavior-y: contain !important;`，阻断滚轮链，需要加在最顶上的父级滚动区
+
+2. 解决电脑端的鼠标滚轮滚动穿透
+
+- 阻止鼠标滚轮滚动事件：`@mousewheel.prevent="() => {}"`
