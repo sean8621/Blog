@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "docs:dev": "vitepress dev docs --host",
+    "docs:dev": "vitepress dev docs --port 15641  --host",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
   },
@@ -12,6 +12,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^24.2.0",
+    "less": "^4.4.0",
     "vitepress": "1.0.0-rc.45"
   },
   "pnpm": {
@@ -22,6 +24,9 @@
     }
   },
   "dependencies": {
+    "@highlightjs/vue-plugin": "^2.1.0",
+    "highlight.js": "^11.11.1",
+    "lodash": "^4.17.21",
     "markdown-it-custom-attrs": "^1.0.2",
     "pdfjs-dist": "^4.10.38"
   }
