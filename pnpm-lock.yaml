@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@highlightjs/vue-plugin':
-        specifier: ^2.1.0
-        version: 2.1.0(highlight.js@11.11.1)(vue@3.5.18)
+        specifier: ^2.1.2
+        version: 2.1.2(highlight.js@11.11.1)(vue@3.5.18)
       highlight.js:
         specifier: ^11.11.1
         version: 11.11.1
@@ -290,8 +290,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@highlightjs/vue-plugin@2.1.0':
-    resolution: {integrity: sha512-E+bmk4ncca+hBEYRV2a+1aIzIV0VSY/e5ArjpuSN9IO7wBJrzUE2u4ESCwrbQD7sAy+jWQjkV5qCCWgc+pu7CQ==}
+  '@highlightjs/vue-plugin@2.1.2':
+    resolution: {integrity: sha512-P7s9DLBGpBsbltk3ZKuYUu9lwDCEfpttjJ5ErI6Wco6GQWIsjcSCJzCoMHgXhRUNkFDtZo7ZgeF8M10POPbDLw==}
     peerDependencies:
       highlight.js: ^11.0.1
       vue: ^3
@@ -1224,7 +1224,7 @@ snapshots:
   '@esbuild/win32-x64@0.21.5':
     optional: true
 
-  '@highlightjs/vue-plugin@2.1.0(highlight.js@11.11.1)(vue@3.5.18)':
+  '@highlightjs/vue-plugin@2.1.2(highlight.js@11.11.1)(vue@3.5.18)':
     dependencies:
       highlight.js: 11.11.1
       vue: 3.5.18

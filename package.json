@@ -24,7 +24,7 @@
     }
   },
   "dependencies": {
-    "@highlightjs/vue-plugin": "^2.1.0",
+    "@highlightjs/vue-plugin": "^2.1.2",
     "highlight.js": "^11.11.1",
     "lodash": "^4.17.21",
     "markdown-it-custom-attrs": "^1.0.2",
