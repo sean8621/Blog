@@ -1,5 +1,5 @@
 <script setup>
-    import EmbeddedWeb from './components/embeddedWeb.vue';
+    import EmbeddedWeb from './components/EmbeddedWeb.vue';
 </script>
 
 <embedded-web
