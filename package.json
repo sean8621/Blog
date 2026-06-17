@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/markdown-it": "^14.1.2",
     "@types/node": "^24.2.0",
     "less": "^4.4.0",
     "vitepress": "1.0.0-rc.45"

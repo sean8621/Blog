@@ -7,6 +7,7 @@ export default defineConfig({
   title: "Sean86 Blog",
   description: "Personal Study Blog",
   lang: "zh-CN",
+  lastUpdated: true,
   base: "/Blog/",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -17,6 +18,8 @@ export default defineConfig({
     search: {
       provider: "local",
     },
+     // 自定义显示前缀文字（对应截图“最后更新于:”）
+    lastUpdatedText: '最后更新于:',
     sidebar: autoSidebar(),
     //  {
     //   // 当用户位于 `guide` 目录时，会显示此侧边栏
