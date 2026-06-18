@@ -69,7 +69,7 @@ jobs:
         run: npm install -g pnpm # 全局安装 pnpm
 
       - name: Install dependencies
-        run: pnpm install # 使用 pnpm 安装依赖
+        run: pnpm install install --allow-build=esbuild,vue-demi # 使用 pnpm 安装依赖
 
       - name: Build VitePress
         run: pnpm run docs:build # 这里是打包 vitepress 命令
