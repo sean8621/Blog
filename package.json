@@ -22,7 +22,11 @@
       "ignoreMissing": [
         "@algolia/client-search"
       ]
-    }
+    },
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "vue-demi"
+    ]
   },
   "dependencies": {
     "@highlightjs/vue-plugin": "^2.1.2",
