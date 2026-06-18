@@ -68,11 +68,10 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm # 全局安装 pnpm
 
-      - name: Approve builds
-        run: pnpm approve-builds
-
       - name: Install dependencies
-        run: pnpm install # 使用 pnpm 安装依赖
+        run: |
+        pnpm config set auto-install-peers true
+        pnpm install #使用 pnpm 安装依赖
 
       - name: Build VitePress
         run: pnpm run docs:build # 这里是打包 vitepress 命令
