@@ -17,17 +17,6 @@
     "less": "^4.4.0",
     "vitepress": "1.0.0-rc.45"
   },
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "@algolia/client-search"
-      ]
-    },
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "vue-demi"
-    ]
-  },
   "dependencies": {
     "@highlightjs/vue-plugin": "^2.1.2",
     "highlight.js": "^11.11.1",

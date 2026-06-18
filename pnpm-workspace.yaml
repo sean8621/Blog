@@ -1,0 +1,7 @@
+# 允许执行安装构建脚本的依赖白名单（解决ERR_PNPM_IGNORED_BUILDS核心配置）
+onlyBuiltDependencies:
+  - esbuild
+  - vue-demi
+
+# 忽略不需要执行构建脚本的包（可选）
+ignoredBuiltDependencies: []
