@@ -68,6 +68,10 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm # 全局安装 pnpm
 
+      - name: Approve pnpm build scripts (non-interactive, specific)
+        run: |
+          # Approve only the known packages that were blocked in CI to limit risk pnpm approve-builds esbuild@0.21.5 vue-demi@0.14.10
+
       - name: Install dependencies
         run: pnpm install #使用 pnpm 安装依赖
 
